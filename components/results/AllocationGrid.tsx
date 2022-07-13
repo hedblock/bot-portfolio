@@ -9,6 +9,7 @@ import AllocationRow from './AllocationRow';
 
 import { Allocation } from '../../hooks/useResults';
 
+
 interface Props {
     results: Allocation[],
 }
