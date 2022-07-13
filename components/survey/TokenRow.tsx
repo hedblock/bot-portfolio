@@ -11,7 +11,7 @@ import InputAdornment from '@mui/material/InputAdornment';
 
 import TokenSymbol from '../utilities/TokenSymbol';
 
-import { Token } from '../../hooks/useSurvey';
+import { Token } from '../../hooks/useTokens';
 
 import theme from '../../styles/theme';
 import { round2 } from '../../services/utils';
@@ -57,7 +57,9 @@ const TokenRow : React.FC<Props> = ({ token, allocation, updateAllocation }) => 
                 <Item>{token.name}</Item>
             </Grid>
             <Grid item xs={2}>
-                <Item>${round2(token.price)}</Item>
+                <Item>
+                    ${round2(token.price).toLocaleString()}
+                </Item>
             </Grid>
             <Grid item xs={4}>
                 <Item>

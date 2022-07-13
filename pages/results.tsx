@@ -9,7 +9,7 @@ const Results : NextPage = () => {
 
   return (
     <Container 
-      title='Results'
+      title='Weekly Results'
       tokenGated
     >
       <ResultsComponent />

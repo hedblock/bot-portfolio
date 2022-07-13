@@ -7,7 +7,7 @@ interface Props {
     slug: string,
 }
 
-const TokenSymbol : React.FC<Props> = ({ symbol, slug}) => {
+const TokenSymbol : React.FC<Props> = ({ symbol, slug }) => {
     return (
         <Link 
             href={`https://coinmarketcap.com/currencies/${slug}/`}

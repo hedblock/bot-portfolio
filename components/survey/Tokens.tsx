@@ -5,7 +5,7 @@ import Grid from '@mui/material/Grid';
 import HeaderRow from './HeaderRow';
 import TokenRow from './TokenRow';
 
-import { Token } from '../../hooks/useSurvey';
+import { Token } from '../../hooks/useTokens';
 import FooterRow from './Footer';
 
 interface Props {

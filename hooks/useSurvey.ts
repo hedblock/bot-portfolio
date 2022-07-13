@@ -1,11 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useMoralis, useMoralisQuery, useNewMoralisObject } from 'react-moralis';
 
-import { TokenData } from '../pages/api/token';
+import useTokens from './useTokens';
 
-export interface Token extends TokenData {
-    price: number;
-}
 
 interface SubmissionData {
     [key: string]: any;
@@ -19,19 +16,12 @@ interface SubmissionData {
 
 const useSurvey = () => {
 
-    const [tokens, setTokens] = useState<Token[]>([]);
     const [allocations, setAllocations] = useState<number[]>([]);
     const [allocationsSum, setAllocationsSum] = useState<number>(0);
 
     const { account } = useMoralis();
 
-    // get all tokens to be included in the survey
-    const { data: tokensData } = useMoralisQuery(
-        "Tokens", 
-        query => query.equalTo('included', true),
-        [],
-        { live: true }
-    );
+    const tokens = useTokens();
 
     // get submissions for current user
     const { data: submissionData } = useMoralisQuery(
@@ -41,24 +31,15 @@ const useSurvey = () => {
         { live: true }
     );
 
+    useEffect(() => {
+        setAllocations(tokens.map(_ => 0));
+    }, [tokens])
+
     const [complete, setComplete] = useState<boolean>(false);
         
     // hook to create and update submissions
     const { isSaving, save } = useNewMoralisObject('Submissions');
-
-    // update token and allocation state when Moralis query changes
-    useEffect(() => {
-        if (tokensData.length > 0) {
-            setTokens(tokensData.map((token) => ({
-                symbol: token.get('symbol') as string,
-                name: token.get('name') as string,
-                slug: token.get('slug') as string,
-                cmcId: token.get('cmcId') as number,
-                price: token.get('price') as number,
-            })))
-            setAllocations(tokensData.map(_ => 0))
-        }
-    }, [tokensData]);
+    
 
     // update allocation for given token and check if allocations sum to 100%
     const updateAllocation = (index: number, value: number) => {
