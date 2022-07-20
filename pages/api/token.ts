@@ -20,12 +20,12 @@ export interface TokenData {
 }
 
 const handler = async (req: NextApiRequest, res: NextApiResponse<TokenData | Error>) => {
-    if(!process.env.NEXT_PUBLIC_CMC_API_KEY) return;
+    if(!process.env.CMC_API_KEY) return;
     const tokenQuery = await fetch(`https://pro-api.coinmarketcap.com/v2/cryptocurrency/info?symbol=${req.body.symbol}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
-            'X-CMC_PRO_API_KEY': process.env.NEXT_PUBLIC_CMC_API_KEY,
+            'X-CMC_PRO_API_KEY': process.env.CMC_API_KEY,
         },
     })
 

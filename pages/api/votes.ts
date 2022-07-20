@@ -18,7 +18,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<Submission[]>) 
     await Moralis.start({
         serverUrl: process.env.NEXT_PUBLIC_MORALIS_SERVER_URL,
         appId: process.env.NEXT_PUBLIC_MORALIS_APP_ID,
-        masterKey: process.env.NEXT_PUBLIC_MORALIS_MASTER_KEY,
+        masterKey: process.env.MORALIS_MASTER_KEY,
     })
 
     const query = new Moralis.Query("Submissions");
