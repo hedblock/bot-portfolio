@@ -20,8 +20,7 @@ const useResults = () => {
 
     const today = new Date();
     today.setHours(0, 0, 0, 0);
-    const twoSundaysAgo = new Date(today.setDate(today.getDate() - today.getDay() - 7))
-    const lastSunday = new Date(today.setDate(today.getDate() - today.getDay() + 7));
+    const lastSunday = new Date(today.setDate(today.getDate() - today.getDay()));
     const nextSunday = new Date(today.setDate(today.getDate() - today.getDay() + 7));
 
     const tokens = useTokens();
@@ -36,7 +35,7 @@ const useResults = () => {
         { live: true }
     );
 
-    const { data: lastWeekCache, isLoading } = useMoralisQuery(
+    const { data: lastWeekCache, isLoading, error } = useMoralisQuery(
         "Results",
         query => query
             .descending('startDate')
@@ -56,13 +55,11 @@ const useResults = () => {
     // calculate the aggregate allocation for each token
     const calculateResults = () => {
         const thisWeekResults = getResultsObject(submissions);
-        const lastWeekResults = lastWeekCache[0].get('results');
-        console.log(lastWeekResults);
+        const lastWeekResults = lastWeekCache.length > 0 ? lastWeekCache[0].get('results') : {};
         const results : Allocation[] = tokens
             .map(token => {
                 const currentAllocation = thisWeekResults[token.slug] / submissions.length;
                 const lastAllocation = lastWeekResults[token.slug];
-                console.log()
                 return {
                     symbol: token.symbol,
                     slug: token.slug,

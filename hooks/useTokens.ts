@@ -10,6 +10,8 @@ export interface Token extends TokenData {
 
 const useTokens = () => {
 
+    const [tokens, setTokens] = useState<Token[]>([]);
+
     // get all tokens to be included in the survey
     const { data: tokensData } = useMoralisQuery(
         "Tokens",
@@ -18,16 +20,6 @@ const useTokens = () => {
         { live: true }
     );
 
-    const [tokens, setTokens] = useState<Token[]>([]);
-    
-    useEffect(() => {
-        const fetchTokens = async () => {
-        const response = await fetch("/api/tokens");
-        const json = await response.json();
-        setTokens(json);
-        }
-        fetchTokens();
-    }, []);
 
     useEffect(() => {
         if (tokensData.length > 0) {
