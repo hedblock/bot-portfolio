@@ -52,7 +52,7 @@ const AllocationRow : React.FC<Props> = ({ allocation }) => {
             </Grid>
             <Grid item xs={3}>
                 <Item>
-                    {allocation.change !== 0 && (allocation.change > 0 ? "+" : "-")}{allocation.change}%
+                    {allocation.change !== 0 && (allocation.change > 0 && "+")}{allocation.change}%
                 </Item>
             </Grid>
         </Grid>

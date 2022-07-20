@@ -3,18 +3,26 @@ import { useMoralis, useMoralisQuery, useNewMoralisObject } from 'react-moralis'
 
 import useTokens from './useTokens';
 
+interface Allocation {
+    token: string;
+    allocation: number;
+}
+
 
 interface SubmissionData {
     [key: string]: any;
     id?: string;
     address: string;
-    allocations: {
-        token: string;
-        allocation: number;
-    }[];
+    allocations: Allocation[];
 }
 
 const useSurvey = () => {
+
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    const lastSunday = new Date(today.setDate(today.getDate() - today.getDay()));
+
+    console.log(lastSunday);
 
     const [allocations, setAllocations] = useState<number[]>([]);
     const [allocationsSum, setAllocationsSum] = useState<number>(0);
@@ -26,7 +34,9 @@ const useSurvey = () => {
     // get submissions for current user
     const { data: submissionData } = useMoralisQuery(
         "Submissions",
-        query => query.equalTo('address', account),
+        query => query
+            .equalTo('address', account)
+            .greaterThan('updatedAt', lastSunday),
         [],
         { live: true }
     );

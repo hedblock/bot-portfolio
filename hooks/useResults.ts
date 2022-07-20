@@ -19,6 +19,7 @@ export interface Allocation {
 const useResults = () => {
 
     const today = new Date();
+    today.setHours(0, 0, 0, 0);
     const twoSundaysAgo = new Date(today.setDate(today.getDate() - today.getDay() - 7))
     const lastSunday = new Date(today.setDate(today.getDate() - today.getDay() + 7));
     const nextSunday = new Date(today.setDate(today.getDate() - today.getDay() + 7));
@@ -26,7 +27,7 @@ const useResults = () => {
     const tokens = useTokens();
 
     // get all submissions
-    const { data: thisWeek } = useMoralisQuery(
+    const { data: submissions } = useMoralisQuery(
         "Submissions", 
         query => query
             .greaterThan('updatedAt', lastSunday)
@@ -35,52 +36,49 @@ const useResults = () => {
         { live: true }
     );
 
-    const { data: lastWeek } = useMoralisQuery(
-        "Submissions",
+    const { data: lastWeekCache, isLoading } = useMoralisQuery(
+        "Results",
         query => query
-            .greaterThan('updatedAt', twoSundaysAgo)
-            .lessThan('updatedAt', lastSunday),
+            .descending('startDate')
+            .limit(1),
         [],
     );
 
-    const getResultsObject = (allocations: Moralis.Object<Moralis.Attributes>[]) => {
-        const resultsObject : {[key: string]: number} = {};
-        allocations.forEach(submission => {
+    const getResultsObject = (submissions: Moralis.Object<Moralis.Attributes>[]) => {
+        return submissions.reduce((acc : {[key: string]: number}, submission) => {
             submission.get('allocations').forEach((allocation : SubmissionAllocation) => {
-                if (resultsObject[allocation.token]) {
-                    resultsObject[allocation.token] += allocation.allocation;
-                } else {
-                    resultsObject[allocation.token] = allocation.allocation;
-                }
+                acc[allocation.token] = (acc[allocation.token] || 0) + allocation.allocation;
             })
-        })
-        return resultsObject;
+            return acc;
+        }, {});
     }
 
     // calculate the aggregate allocation for each token
     const calculateResults = () => {
-        const thisWeekResults = getResultsObject(thisWeek);
-        const lastWeekResults = getResultsObject(lastWeek);
+        const thisWeekResults = getResultsObject(submissions);
+        const lastWeekResults = lastWeekCache[0].get('results');
+        console.log(lastWeekResults);
         const results : Allocation[] = tokens
             .map(token => {
-                const currentAllocation = thisWeekResults[token.slug] / thisWeek.length;
-                const lastAllocation = lastWeekResults[token.slug] / lastWeek.length;
+                const currentAllocation = thisWeekResults[token.slug] / submissions.length;
+                const lastAllocation = lastWeekResults[token.slug];
+                console.log()
                 return {
                     symbol: token.symbol,
                     slug: token.slug,
                     allocation: currentAllocation,
-                    change: lastAllocation 
-                        ? currentAllocation - lastAllocation / lastAllocation
+                    change: lastAllocation
+                        ? currentAllocation - lastAllocation
                         : (currentAllocation > 0 ? 100 : 0),
                     price: token.price,
                 }
             })
             .sort((a, b) => b.allocation - a.allocation);
-        return results
+        return results;
     }
 
     return {
-        currentResults: calculateResults(),
+        currentResults: isLoading ? [] : calculateResults(),
     }
 
 }
