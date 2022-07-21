@@ -3,7 +3,7 @@ import React from 'react';
 import { VStack } from '@chakra-ui/react';
 
 import HeaderRow from './HeaderRow';
-import TokenRow from './TokenRow';
+import TokenRow from './TokenRow/index';
 import FooterRow from './Footer';
 
 import { Token } from '../../hooks/useTokens';
@@ -21,7 +21,7 @@ const Tokens : React.FC<Props> = ({ tokens, allocations, updateAllocation, alloc
         <VStack
             spacing={2}
             w='100%'
-        >
+        > 
             <HeaderRow />
             {
                 tokens.map((token, index) => (

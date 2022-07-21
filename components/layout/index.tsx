@@ -1,23 +1,14 @@
 import { FC, ReactNode } from 'react'
 
-import { CircularProgress, Container, Flex, VStack } from '@chakra-ui/react'
-import Navbar, { navbarHeight } from '../Navbar'
+import { Flex } from '@chakra-ui/react'
 
-import useAuth from '../../hooks/useAuth';
-
-import AdminUnathorized from '../utilities/AdminUnauthorized';
-import NotConnected from '../utilities/NotConnected';
-import TokenUnauthorized from '../utilities/TokenUnauthorized';
+import Navbar from '../Navbar'
 
 interface Props {
     children: ReactNode;
-    tokenGated?: boolean;
-    adminGated?: boolean;
 }
 
-const Layout : FC<Props> = ({ children, adminGated, tokenGated }) => {
-
-    const { account, loading, adminAuth, tokenAuth } = useAuth();
+const Layout : FC<Props> = ({ children }) => {
 
     return (
         <Flex
@@ -26,38 +17,7 @@ const Layout : FC<Props> = ({ children, adminGated, tokenGated }) => {
             position='relative'
         >
             <Navbar />
-            <Container
-                flex={1}
-                display='flex'
-                flexDirection='column'
-                py={navbarHeight}
-                justifyContent='center'
-            >
-                {
-                    loading ? (
-                        <VStack>
-                            <CircularProgress 
-                                isIndeterminate
-                            />
-                        </VStack>
-                    ) : (
-                        account ? (
-                            adminGated && !adminAuth ? (
-                                <AdminUnathorized />
-                            ) : (
-                                tokenGated && !tokenAuth ? (
-                                    <TokenUnauthorized />
-                                ) : (
-                                    children
-                                )
-                            )
-                        ) : (
-                            <NotConnected />
-                        )
-                    )
-                    
-            }
-            </Container>
+            { children }
         </Flex>
     )
 }
