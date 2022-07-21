@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { HStack, WrapItem, VStack, Text, IconButton } from '@chakra-ui/react';
+import { HStack, WrapItem, VStack, Text, IconButton, Image } from '@chakra-ui/react';
 
 import { MdCancel } from 'react-icons/md'
 
@@ -25,6 +25,13 @@ const TokenDisplay : React.FC<Props> = ({ token, removeToken }) => {
                     spacing={4} 
                     justifyContent='center' 
                 >
+                    <Image 
+                        alt={token.symbol}
+                        src={token.logo}
+                        height='30px'
+                        width='30px'
+                        rounded='full'
+                    />
                     <VStack
                         spacing={0}
                     >
