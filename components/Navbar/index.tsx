@@ -111,6 +111,7 @@ const Navbar = () => {
             >
                 <Button 
                     onClick={toggleColorMode}
+                    rounded='full'
                 >
                     {
                         colorMode === 'light' ? (
