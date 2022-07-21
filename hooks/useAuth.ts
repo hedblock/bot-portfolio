@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 import { Moralis } from 'moralis';
 import { useMoralis, useWeb3ExecuteFunction } from 'react-moralis';
@@ -17,14 +17,18 @@ export const connectors : Connector[] = [
 
 const useAuth = () => {
 
-    // currently connected account
+    const [loading, setLoading] = useState(true);
     const { account, isWeb3Enabled, enableWeb3 } = useMoralis();
 
     useEffect(() => {
-        const connectorId = window.localStorage.getItem("connectorId");
-        if (!account && connectorId) {
-            enableWeb3({ provider: connectorId as Moralis.Web3ProviderType });
+        const checkWeb3 = async () => {
+            const connectorId = window.localStorage.getItem("connectorId");
+            if (!account && connectorId) {
+                await enableWeb3({ provider: connectorId as Moralis.Web3ProviderType });
+            }
+            setLoading(false);
         }
+        checkWeb3();
     }, [account, isWeb3Enabled, enableWeb3]);
 
     const connect = async (connectorId : Moralis.Web3ProviderType) => {
@@ -51,6 +55,7 @@ const useAuth = () => {
         // tokenAuth: data instanceof BigNumber && !data.isZero(),
         // adminAuth: account && process.env.NEXT_PUBLIC_ADMIN_ADDRESS === account,
         account,
+        loading,
         connect,
         tokenAuth: true,
         adminAuth: true,

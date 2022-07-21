@@ -1,6 +1,6 @@
 import { FC, ReactNode } from 'react'
 
-import { Container, Flex } from '@chakra-ui/react'
+import { CircularProgress, Container, Flex, VStack } from '@chakra-ui/react'
 import Navbar, { navbarHeight } from '../Navbar'
 
 import useAuth from '../../hooks/useAuth';
@@ -17,7 +17,7 @@ interface Props {
 
 const Layout : FC<Props> = ({ children, adminGated, tokenGated }) => {
 
-    const { account, adminAuth, tokenAuth } = useAuth();
+    const { account, loading, adminAuth, tokenAuth } = useAuth();
 
     return (
         <Flex
@@ -34,19 +34,28 @@ const Layout : FC<Props> = ({ children, adminGated, tokenGated }) => {
                 justifyContent='center'
             >
                 {
-                    account ? (
-                        adminGated && !adminAuth ? (
-                            <AdminUnathorized />
-                        ) : (
-                            tokenGated && !tokenAuth ? (
-                                <TokenUnauthorized />
-                            ) : (
-                                children
-                            )
-                        )
+                    loading ? (
+                        <VStack>
+                            <CircularProgress 
+                                isIndeterminate
+                            />
+                        </VStack>
                     ) : (
-                        <NotConnected />
+                        account ? (
+                            adminGated && !adminAuth ? (
+                                <AdminUnathorized />
+                            ) : (
+                                tokenGated && !tokenAuth ? (
+                                    <TokenUnauthorized />
+                                ) : (
+                                    children
+                                )
+                            )
+                        ) : (
+                            <NotConnected />
+                        )
                     )
+                    
             }
             </Container>
         </Flex>

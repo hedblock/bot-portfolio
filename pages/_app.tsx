@@ -36,12 +36,9 @@ export default function MyApp(props : Props) {
         serverUrl={SERVER_URL}
       >
         <ChakraProvider theme={chakraTheme}>
-          {/* <ThemeProvider theme={theme}> */}
-            {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-            <Layout>
-              <Component {...pageProps} />
-            </Layout>
-          {/* </ThemeProvider> */}
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
         </ChakraProvider>
       </MoralisProvider>
     </CacheProvider>

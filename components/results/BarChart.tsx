@@ -14,6 +14,7 @@ const BarChart : React.FC<Props> = ({ data, labels }) => {
 
   const { colors } = useTheme();
 
+  const barColor = useColorModeValue(colors.brand[600], colors.brand[300]);
   const gridLineColor = useColorModeValue(colors.gray[200], colors.gray[700]);
   const tickColor = useColorModeValue(colors.gray[700], colors.gray[200]);
 
@@ -24,7 +25,8 @@ const BarChart : React.FC<Props> = ({ data, labels }) => {
         datasets: [{
             label: 'Allocation',
             data,
-            backgroundColor: colors.brand[500],
+            backgroundColor: barColor,
+            borderRadius: 8,
         }]
       }}
       options={{

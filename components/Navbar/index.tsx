@@ -1,64 +1,23 @@
-import { ReactNode, FC } from 'react';
+import { FC } from 'react';
 
 import { useRouter } from 'next/router';
 
 import {
-  Box,
-  Link,
   Button,
   HStack,
-  useColorModeValue,
   useColorMode,
   Text,
 } from '@chakra-ui/react';
 import { MoonIcon, SunIcon } from '@chakra-ui/icons';
 
+import NavLink from './NavLink';
 import Wallet from './Wallet';
 
-
-interface NavLinkProps {
-    children: ReactNode;
-    href: string;
-    isActive?: boolean;
-}
-
-const NavLink : FC<NavLinkProps> = ({ children, href, isActive }) => {
-    const activeBg = useColorModeValue('gray.200', 'gray.700')
-    return (
-        <Link
-            px={2}
-            py={1}
-            rounded={'md'}
-            bg={isActive ? activeBg : 'transparent'}
-            _hover={{
-            textDecoration: 'none',
-            bg: activeBg,
-            }}
-            href={href}
-        >
-            {children}
-        </Link>
-    )
-};
-
-const routes = [
-    {
-        name: 'Vote',
-        href: '/',
-    },
-    {
-        name: 'Results',
-        href: '/results',
-    },
-    {
-        name: 'About',
-        href: '/about',
-    },
-]
+import routes from './routes';
 
 export const navbarHeight = '4rem';
 
-const Navbar = () => {
+const Navbar : FC = () => {
 
     const router = useRouter()
 
