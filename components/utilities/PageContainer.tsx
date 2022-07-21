@@ -41,7 +41,7 @@ const PageContainer : FC<Props> = ({ children, tokenGated, adminGated}) => {
                         adminGated && !adminAuth ? (
                             <AdminUnathorized />
                         ) : (
-                            tokenGated && (
+                            tokenGated ? (
                                 wrongChain ? (
                                     <WrongChain />
                                 ) : (
@@ -51,6 +51,8 @@ const PageContainer : FC<Props> = ({ children, tokenGated, adminGated}) => {
                                         children
                                     )
                                 )
+                            ) : (
+                                children
                             )
                         )
                     ) : (
