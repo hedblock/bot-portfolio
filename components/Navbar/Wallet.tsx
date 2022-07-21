@@ -1,20 +1,17 @@
-import { FC } from 'react'
-
 import {
     Menu,
     MenuButton,
     MenuList,
-    MenuDivider,
     MenuItem,
     Button
 } from '@chakra-ui/react'
 
-import { useMoralis } from 'react-moralis';
 import { getEllipsisTxt } from '../../services/utils';
+import useAuth, { connectors } from '../../hooks/useAuth';
 
 const Wallet = () => {
 
-    const { account, enableWeb3 } = useMoralis();
+    const { account, connect } = useAuth();
 
     return (
         <Menu>
@@ -37,15 +34,16 @@ const Wallet = () => {
                         </>
                     ) : (
                         <>
-                            <MenuItem
-                                onClick={() => enableWeb3()}
-                            >
-                                Metamask
-                            </MenuItem>
-                            <MenuItem>
-                                Coinbase Wallet
-                            </MenuItem>
-                            
+                            {
+                                connectors.map(connector => (
+                                    <MenuItem 
+                                        key={connector.title}
+                                        onClick={() => connect(connector.connectorId)}
+                                    >
+                                        {connector.title}
+                                    </MenuItem>
+                                ))
+                            }
                         </>
                     )
                 }

@@ -1,13 +1,38 @@
 import { useEffect } from 'react';
 
-import { BigNumber } from '@ethersproject/bignumber';
-
+import { Moralis } from 'moralis';
 import { useMoralis, useWeb3ExecuteFunction } from 'react-moralis';
+
+interface Connector {
+    title: string;
+    connectorId: Moralis.Web3ProviderType;
+}
+
+export const connectors : Connector[] = [
+    {
+        title: "Metamask",
+        connectorId: "metamask",
+    }
+]
 
 const useAuth = () => {
 
     // currently connected account
-    const { account } = useMoralis();
+    const { account, isWeb3Enabled, enableWeb3 } = useMoralis();
+
+    useEffect(() => {
+        const connectorId = window.localStorage.getItem("connectorId");
+        if (!account && connectorId) {
+            enableWeb3({ provider: connectorId as Moralis.Web3ProviderType });
+        }
+    }, [account, isWeb3Enabled, enableWeb3]);
+
+    const connect = async (connectorId : Moralis.Web3ProviderType) => {
+        if (!isWeb3Enabled) {
+            await enableWeb3({ provider: connectorId });
+            window.localStorage.setItem("connectorId", connectorId);
+        }
+    }
 
     // fetch RVPC NFT balance of current account 
     const { data, error, fetch } = useWeb3ExecuteFunction({
@@ -26,6 +51,7 @@ const useAuth = () => {
         // tokenAuth: data instanceof BigNumber && !data.isZero(),
         // adminAuth: account && process.env.NEXT_PUBLIC_ADMIN_ADDRESS === account,
         account,
+        connect,
         tokenAuth: true,
         adminAuth: true,
     }
