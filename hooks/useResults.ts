@@ -3,6 +3,8 @@ import { Moralis } from "moralis";
 
 import useTokens, { Token } from "./useTokens";
 
+import { round2 } from "../services/utils";
+
 interface SubmissionAllocation {
     token: string;
     allocation: number;
@@ -57,7 +59,7 @@ const useResults = () => {
         const thisWeekResults = getResultsObject(submissions);
         const lastWeekResults = lastWeekCache.length > 0 ? lastWeekCache[0].get('results') : {};
         return tokens.map(token => {
-                const currentAllocation = thisWeekResults[token.slug] / submissions.length;
+                const currentAllocation = round2(thisWeekResults[token.slug] / submissions.length);
                 const lastAllocation = lastWeekResults[token.slug];
                 return {
                     ...token,
