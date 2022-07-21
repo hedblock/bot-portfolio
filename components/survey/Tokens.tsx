@@ -1,12 +1,12 @@
 import React from 'react';
 
-import Grid from '@mui/material/Grid';
+import { VStack } from '@chakra-ui/react';
 
 import HeaderRow from './HeaderRow';
 import TokenRow from './TokenRow';
+import FooterRow from './Footer';
 
 import { Token } from '../../hooks/useTokens';
-import FooterRow from './Footer';
 
 interface Props {
     tokens: Token[],
@@ -18,7 +18,10 @@ interface Props {
 const Tokens : React.FC<Props> = ({ tokens, allocations, updateAllocation, allocationsSum }) => {
 
     return (
-        <Grid container spacing={2}>
+        <VStack
+            spacing={2}
+            w='100%'
+        >
             <HeaderRow />
             {
                 tokens.map((token, index) => (
@@ -31,7 +34,7 @@ const Tokens : React.FC<Props> = ({ tokens, allocations, updateAllocation, alloc
                 ))
             }
             <FooterRow allocationsSum={allocationsSum}/>
-        </Grid>
+        </VStack>
     )
 }
 

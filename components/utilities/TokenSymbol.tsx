@@ -1,6 +1,6 @@
 import React from 'react'
 
-import Link from 'next/link'
+import { Link, Text } from "@chakra-ui/react"
 
 interface Props {
     symbol: string,
@@ -11,17 +11,15 @@ const TokenSymbol : React.FC<Props> = ({ symbol, slug }) => {
     return (
         <Link 
             href={`https://coinmarketcap.com/currencies/${slug}/`}
-            
         >
-            <a 
-                style={{
-                    textDecoration: 'none',
-                    color: '#FFF',
-                    fontWeight: 'bold',
+            <Text
+                opacity={0.8}
+                _hover={{
+                    opacity: 0.5,
                 }}
             >
                 {symbol}
-            </a>
+            </Text>
         </Link>
     )
 }

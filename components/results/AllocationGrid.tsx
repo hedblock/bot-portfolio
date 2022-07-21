@@ -1,8 +1,6 @@
 import React from 'react';
 
-import Grid from '@mui/material/Grid';
-import Typography from '@mui/material/Typography';
-import Stack from '@mui/material/Stack';
+import { Text, VStack } from '@chakra-ui/react';
 
 import HeaderRow from './HeaderRow';
 import AllocationRow from './AllocationRow';
@@ -17,16 +15,19 @@ interface Props {
 const AllocationGrid : React.FC<Props> = ({ results }) => {
 
     return (
-        <Stack
-            alignItems='center'
+        <VStack
             spacing={2}
+            width='100%'
         >
-            <Typography
-                variant='h6'
+            <Text
+                fontWeight='bold'
+                fontSize='xl'
             >
                 All Allocations
-            </Typography>
-            <Grid container spacing={2}>
+            </Text>
+            <VStack
+                width='100%'
+            >
                 <HeaderRow />
                 {
                     results.map(allocation => (
@@ -36,8 +37,8 @@ const AllocationGrid : React.FC<Props> = ({ results }) => {
                         />
                     ))
                 }
-            </Grid>
-        </Stack>
+            </VStack>
+        </VStack>
     )
 }
 

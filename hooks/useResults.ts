@@ -1,14 +1,14 @@
 import { useMoralisQuery } from "react-moralis";
-
 import { Moralis } from "moralis";
-import useTokens from "./useTokens";
+
+import useTokens, { Token } from "./useTokens";
 
 interface SubmissionAllocation {
     token: string;
     allocation: number;
 }
 
-export interface Allocation {
+export interface Allocation extends Token {
     symbol: string;
     slug: string;
     allocation: number;
@@ -20,8 +20,7 @@ const useResults = () => {
 
     const today = new Date();
     today.setHours(0, 0, 0, 0);
-    const twoSundaysAgo = new Date(today.setDate(today.getDate() - today.getDay() - 7))
-    const lastSunday = new Date(today.setDate(today.getDate() - today.getDay() + 7));
+    const lastSunday = new Date(today.setDate(today.getDate() - today.getDay()));
     const nextSunday = new Date(today.setDate(today.getDate() - today.getDay() + 7));
 
     const tokens = useTokens();
@@ -54,27 +53,21 @@ const useResults = () => {
     }
 
     // calculate the aggregate allocation for each token
-    const calculateResults = () => {
+    const calculateResults = () : Allocation[] => {
         const thisWeekResults = getResultsObject(submissions);
-        const lastWeekResults = lastWeekCache[0].get('results');
-        console.log(lastWeekResults);
-        const results : Allocation[] = tokens
-            .map(token => {
+        const lastWeekResults = lastWeekCache.length > 0 ? lastWeekCache[0].get('results') : {};
+        return tokens.map(token => {
                 const currentAllocation = thisWeekResults[token.slug] / submissions.length;
                 const lastAllocation = lastWeekResults[token.slug];
-                console.log()
                 return {
-                    symbol: token.symbol,
-                    slug: token.slug,
+                    ...token,
                     allocation: currentAllocation,
                     change: lastAllocation
                         ? currentAllocation - lastAllocation
                         : (currentAllocation > 0 ? 100 : 0),
-                    price: token.price,
                 }
             })
             .sort((a, b) => b.allocation - a.allocation);
-        return results;
     }
 
     return {

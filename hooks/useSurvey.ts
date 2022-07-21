@@ -22,8 +22,6 @@ const useSurvey = () => {
     today.setHours(0, 0, 0, 0);
     const lastSunday = new Date(today.setDate(today.getDate() - today.getDay()));
 
-    console.log(lastSunday);
-
     const [allocations, setAllocations] = useState<number[]>([]);
     const [allocationsSum, setAllocationsSum] = useState<number>(0);
 

@@ -1,27 +1,9 @@
 import React from 'react'
 
-import Stack from '@mui/material/Stack';
-import Typography from '@mui/material/Typography';
-import Paper from '@mui/material/Paper';
-import { styled } from '@mui/material/styles';
+import { VStack, Text } from '@chakra-ui/react';
 
 import { TokenData } from '../../pages/api/token';
-
-const Item = styled(Paper)(({ theme }) => ({
-    ...theme.typography.body2,
-    padding: '0.5rem 2rem',
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
-    height: '100%',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-    '&:hover': {
-        backgroundColor: theme.palette.primary.main,
-        cursor: 'pointer'
-    }
-}));
-
+import Card from '../utilities/Card';
 
 interface Props {
     tokenOption: TokenData,
@@ -31,12 +13,29 @@ interface Props {
 const TokenOption : React.FC<Props> = ({ tokenOption, selectOption }) => {
 
   return (
-    <Item onClick={selectOption}>
-        <Stack>
-            <Typography variant='body1'>{tokenOption.name}</Typography>
-            <Typography variant='caption'>{tokenOption.symbol}</Typography>
-        </Stack>
-    </Item>
+    <Card
+        onClick={selectOption}
+        _hover={{
+            cursor: 'pointer',
+            opacity: 0.6
+        }}
+    >
+        <VStack
+            spacing={0}
+        >
+            <Text 
+                variant='body1'
+                align='center'
+            >
+                {tokenOption.name}
+            </Text>
+            <Text 
+                variant='caption'
+            >
+                {tokenOption.symbol}
+            </Text>
+        </VStack>
+    </Card>
   )
 }
 

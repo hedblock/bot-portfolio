@@ -1,11 +1,9 @@
 import React from 'react'
 
-import Stack from '@mui/material/Stack';
-import Typography from '@mui/material/Typography';
-
 import TokenOption from './TokenOption';
 
 import { Token } from '../../hooks/useAdmin';
+import { HStack, VStack, Text } from '@chakra-ui/react';
 
 interface Props {
     addOptions: Token[];
@@ -14,18 +12,30 @@ interface Props {
 
 const TokenOptions : React.FC<Props> = ({ addOptions, selectOption }) => {
   return (
-    <Stack alignItems='center' spacing={1}>
-        <Typography color='#FFF'>Select an Option</Typography>
-        <Stack direction='row' spacing={2}>
-            {addOptions.map((option, index) => (
-                <TokenOption
-                    key={index}
-                    tokenOption={option}
-                    selectOption={() => selectOption(option)}
-                />
-            ))}
-        </Stack>
-    </Stack>
+    <VStack
+        spacing={4}
+    >
+        <Text
+            fontWeight='bold'
+            fontSize='lg'
+        >
+            Select an Option
+        </Text>
+        <HStack 
+            spacing={2}
+            align='flex-start'
+        >
+            {
+                addOptions.map((option, index) => (
+                    <TokenOption
+                        key={index}
+                        tokenOption={option}
+                        selectOption={() => selectOption(option)}
+                    />
+                ))
+            }
+        </HStack>
+    </VStack>
   )
 }
 

@@ -1,11 +1,9 @@
 import React from 'react'
 
-import Stack from '@mui/material/Stack';
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
+import { HStack, VStack, Input, Button, Text } from '@chakra-ui/react';
 
 import TokenOptions from './TokenOptions';
+import Card from '../utilities/Card';
 
 import { Token } from '../../hooks/useAdmin';
 
@@ -26,32 +24,49 @@ const AddToken : React.FC<Props> = ({ addToken, selectOption, addOptions, addErr
     }
 
   return (
-    <Stack alignItems='center' spacing={2}>
-        <Stack direction='row' spacing={2}>
-            <TextField 
-                label='Token Symbol'
-                value={symbol}
-                onChange={(e) => setSymbol(e.target.value)}
-                sx={{
-                    input: {
-                        color: '#FFF'
-                    }
-                }}
-            />
-            <Button
-                variant='outlined'
-                onClick={submit}
+    <VStack 
+        spacing={4}
+    >
+        <Card>
+            <VStack
+                spacing={2}
             >
-                Add
-            </Button>
-        </Stack>
-        {addError && <Typography variant='caption' color='error'>Token not found.</Typography>}
+                <HStack 
+                    spacing={2}
+                >
+                    <Input 
+                        placeholder='Token Symbol'
+                        value={symbol}
+                        onChange={(e) => setSymbol(e.target.value)}
+                        sx={{
+                            input: {
+                                color: '#FFF'
+                            }
+                        }}
+                    />
+                    <Button
+                        variant='solid'
+                        onClick={submit}
+                    >
+                        Add
+                    </Button>
+                </HStack>
+                {addError && (
+                    <Text 
+                        color='red.600'
+                    >
+                        Token not found.
+                    </Text>
+                )}
+            </VStack>
+        </Card>
         {addOptions.length > 0 && (
             <TokenOptions 
                 addOptions={addOptions} 
                 selectOption={selectOption} 
-            />)}
-    </Stack>
+            />
+        )}
+    </VStack>
   )
 }
 

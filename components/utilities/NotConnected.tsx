@@ -1,12 +1,25 @@
 import React from 'react'
 
-import Typography from '@mui/material/Typography'
+import {
+  VStack,
+  Heading,
+  Text,
+} from '@chakra-ui/react'
 
 const NotConnected = () => {
+
   return (
-    <Typography variant='body1' align='center' color='text.secondary'>
-        You must have a web3 connection to access this page.
-    </Typography>
+    <VStack spacing={1}>
+      <Heading>
+        Not Connected
+      </Heading>
+      <Text 
+        variant='body1' 
+        align='center'
+      >
+          You must connect your wallet to view this page.
+      </Text>
+    </VStack>
   )
 }
 

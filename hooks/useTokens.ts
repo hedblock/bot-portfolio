@@ -19,15 +19,6 @@ const useTokens = () => {
     );
 
     const [tokens, setTokens] = useState<Token[]>([]);
-    
-    useEffect(() => {
-        const fetchTokens = async () => {
-        const response = await fetch("/api/tokens");
-        const json = await response.json();
-        setTokens(json);
-        }
-        fetchTokens();
-    }, []);
 
     useEffect(() => {
         if (tokensData.length > 0) {
@@ -37,6 +28,7 @@ const useTokens = () => {
                 slug: token.get('slug') as string,
                 cmcId: token.get('cmcId') as number,
                 price: token.get('price') as number,
+                logo: token.get('logo') as string,
             })));
         }
     }, [tokensData]);

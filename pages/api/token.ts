@@ -6,32 +6,34 @@ interface Error {
 }
 
 interface TokenResponse {
-    symbol: string
-    name: string
-    slug: string
-    id: number
+    symbol: string;
+    name: string;
+    slug: string;
+    id: number;
+    logo: string;
 }
 
 export interface TokenData {
-    symbol: string,
-    name: string,
-    slug: string,
-    cmcId: number,
+    symbol: string;
+    name: string;
+    slug: string;
+    cmcId: number;
+    logo: string;
 }
 
 const handler = async (req: NextApiRequest, res: NextApiResponse<TokenData | Error>) => {
-    if(!process.env.NEXT_PUBLIC_CMC_API_KEY) return;
+    if(!process.env.CMC_API_KEY) return;
     const tokenQuery = await fetch(`https://pro-api.coinmarketcap.com/v2/cryptocurrency/info?symbol=${req.body.symbol}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
-            'X-CMC_PRO_API_KEY': process.env.NEXT_PUBLIC_CMC_API_KEY,
+            'X-CMC_PRO_API_KEY': process.env.CMC_API_KEY,
         },
     })
 
-    if(tokenQuery.status === 400){
-        res.status(400).json({
-            error: 'Invalid token symbol'
+    if(tokenQuery.status !== 200){
+        res.status(tokenQuery.status).json({
+            error: tokenQuery.statusText,
         })
     } else {
         const tokenData = (await tokenQuery.json()).data[req.body.symbol];
@@ -40,7 +42,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<TokenData | Err
             name: token.name,
             slug: token.slug,
             cmcId: token.id,
-            coinMarketCapUrl: `https://coinmarketcap.com/currencies/${token.slug}/`
+            logo: token.logo
         })))
     }
 }

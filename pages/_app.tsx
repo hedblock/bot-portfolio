@@ -1,14 +1,15 @@
 import * as React from 'react';
 import PropTypes from 'prop-types';
 import Head from 'next/head';
-import { ThemeProvider } from '@mui/material/styles';
-import CssBaseline from '@mui/material/CssBaseline';
 import { CacheProvider, EmotionCache } from '@emotion/react';
-import theme from '../styles/theme';
+import chakraTheme from '../theme/theme';
 import createEmotionCache from '../styles/createEmotionCache';
 import { AppProps } from 'next/app';
 
 import { MoralisProvider } from "react-moralis";
+
+import { ChakraProvider } from '@chakra-ui/react'
+import Layout from '../components/layout';
 
 const clientSideEmotionCache = createEmotionCache();
 
@@ -34,11 +35,14 @@ export default function MyApp(props : Props) {
         appId={APP_ID} 
         serverUrl={SERVER_URL}
       >
-        <ThemeProvider theme={theme}>
-          {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-          <CssBaseline />
-          <Component {...pageProps} />
-        </ThemeProvider>
+        <ChakraProvider theme={chakraTheme}>
+          {/* <ThemeProvider theme={theme}> */}
+            {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+            <Layout>
+              <Component {...pageProps} />
+            </Layout>
+          {/* </ThemeProvider> */}
+        </ChakraProvider>
       </MoralisProvider>
     </CacheProvider>
   );
