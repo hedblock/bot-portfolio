@@ -6,5 +6,5 @@ export const getEllipsisTxt = (str : string, n = 6) => {
 };
 
 export const round2 = (num : number) => {
-    return (num.toFixed(2));
+    return Math.round(num * 100) / 100;
 }

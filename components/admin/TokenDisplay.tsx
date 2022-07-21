@@ -1,27 +1,13 @@
 import React from 'react'
 
+import { HStack, WrapItem, VStack, Text, IconButton } from '@chakra-ui/react';
 
-import { styled } from '@mui/material/styles';
-import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
-import Stack from '@mui/material/Stack';
-import Typography from '@mui/material/Typography';
-import IconButton from '@mui/material/IconButton';
-import ClearIcon from '@mui/icons-material/Clear';
+import { MdCancel } from 'react-icons/md'
+
+import TokenSymbol from '../utilities/TokenSymbol';
+import Card from '../utilities/Card';
 
 import { Token } from '../../hooks/useAdmin';
-import TokenSymbol from '../utilities/TokenSymbol';
-
-const Item = styled(Paper)(({ theme }) => ({
-    ...theme.typography.body2,
-    padding: '0.5rem 1rem',
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
-    height: '100%',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'center',
-}));
 
 interface Props {
     token: Token,
@@ -31,33 +17,37 @@ interface Props {
 const TokenDisplay : React.FC<Props> = ({ token, removeToken }) => {
 
     return (
-        <Box sx={{padding: '0.5rem'}}>
-            <Item>
-                <Stack 
-                    direction='row' 
-                    spacing={2} 
+        <WrapItem
+            p='0.5rem'
+        >
+            <Card>
+                <HStack 
+                    spacing={4} 
                     justifyContent='center' 
-                    alignItems='center'
                 >
-                    <Stack alignItems='center'>
+                    <VStack
+                        spacing={0}
+                    >
+                        <Text
+                            fontWeight='bold'
+                            fontSize='lg'
+                        >
+                            {token.name}
+                        </Text>
                         <TokenSymbol
                             symbol={token.symbol}
                             slug={token.slug}
                         />
-                        <Typography
-                            variant='body2'
-                        >
-                            {token.name}
-                        </Typography>
-                    </Stack>
+                    </VStack>
                     <IconButton
+                        aria-label='Remove Token'
                         onClick={() => removeToken(token)}
                     >
-                        <ClearIcon />
+                        <MdCancel />
                     </IconButton>
-                </Stack>
-            </Item>
-        </Box>
+                </HStack>
+            </Card>
+        </WrapItem>
     )
 }
 

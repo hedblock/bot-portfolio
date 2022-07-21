@@ -1,11 +1,7 @@
-// Moralis.Cloud.afterSave("Tokens", async (request) => {
-//     const symbol = request.object.get('symbol');
-//     const tokenMetadata = await Moralis.Web3API.token.getTokenMetadataBySymbol({
-//         symbols: symbol
-//     });
-// });
-
 Moralis.Cloud.job("getTokenPrices", async (request) => {
+
+    const config = await Moralis.Config.get({useMasterKey: true});
+    const CMC_API_KEY = config.get("CMC_API_KEY");
 
     const Tokens = Moralis.Object.extend("Tokens");
     const query = new Moralis.Query(Tokens);
@@ -17,7 +13,7 @@ Moralis.Cloud.job("getTokenPrices", async (request) => {
         url: `https://pro-api.coinmarketcap.com/v2/cryptocurrency/quotes/latest?id=${cmcIds}`,
         headers: {
             'Content-Type': 'application/json',
-            'X-CMC_PRO_API_KEY': "7673b1d5-3a2c-4a8a-8794-c39e6ae14e5e",
+            'X-CMC_PRO_API_KEY': CMC_API_KEY,
         },
     })
 

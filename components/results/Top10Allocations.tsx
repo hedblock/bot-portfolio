@@ -1,9 +1,9 @@
 import React from 'react'
 
 import {
-    Stack,
-    Typography
-} from '@mui/material'
+    VStack,
+    Text
+} from '@chakra-ui/react'
 
 import BarChart from './BarChart'
 
@@ -21,19 +21,20 @@ const Top10Allocations : React.FC<Props> = ({ results }) => {
     const numAllocations = 10;
 
     return (
-        <Stack
-            alignItems='center'
+        <VStack
+            width='100%'
         >
-            <Typography
-                variant='h6'
+            <Text
+                fontSize='xl'
+                fontWeight='bold'
             >
-                Top 10 Allocations
-            </Typography>
+                Top Allocations
+            </Text>
             <BarChart 
                 data={results.slice(0, numAllocations).map(allocation => allocation.allocation)}
                 labels={results.slice(0, numAllocations).map(allocation => allocation.symbol)}
             />
-        </Stack>
+        </VStack>
     )
 }
 

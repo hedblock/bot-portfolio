@@ -1,42 +1,25 @@
 import React from 'react'
 
-import { styled } from '@mui/material/styles';
-import Grid from '@mui/material/Grid';
-import Stack from '@mui/material/Stack';
-import Typography from '@mui/material/Typography';
-
-const Item = styled(Typography)(({ theme }) => ({
-    ...theme.typography.body2,
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
-    fontWeight: 'bold'
-}));
-
+import { HStack, Text } from '@chakra-ui/react'
 
 const HeaderRow : React.FC = () => (
-    <Grid 
-        container 
-        item 
-        spacing={1}
-        alignItems='center'
-        justifyContent='center'
+    <HStack
+        width='100%'
+        spacing={2}
     >
-        <Grid xs={2}>
-            <Item>Symbol</Item>
-        </Grid>
-        <Grid xs={2}>
-            <Item>Name</Item>
-        </Grid>
-        <Grid xs={2}>
-            <Item>Current Price</Item>
-        </Grid>
-        <Grid xs={4}>
-            <Item>Weight</Item>
-        </Grid>
-        <Grid xs={2}>
-            <Item>Allocation</Item>
-        </Grid>
-    </Grid>
+        <Text
+            fontWeight='bold'
+            flex={1}
+        >
+            Token
+        </Text>
+        <Text
+            fontWeight='bold'
+            flex={1}
+        >
+            Allocation
+        </Text>
+    </HStack>
 )
 
 export default HeaderRow

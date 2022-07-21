@@ -2,12 +2,10 @@ import React from 'react'
 
 import useSurvey from '../../hooks/useSurvey';
 
-import Stack from '@mui/material/Stack';
-import Typography from '@mui/material/Typography';
-import CircularProgress from '@mui/material/CircularProgress';
-
 import Tokens from './Tokens';
 import SubmitButton from './SubmitButton';
+
+import { Heading, VStack, Text, CircularProgress } from '@chakra-ui/react';
 
 const SurveyComponent = () => {
     const { 
@@ -20,38 +18,63 @@ const SurveyComponent = () => {
         isSaving,
         complete,
     } = useSurvey();
+
+    if(complete) {
+        return (
+            <VStack spacing={1}>
+                <Text
+                    fontSize="2xl"
+                    fontWeight="bold"
+                >
+                    Survey Complete
+                </Text>
+                <Text 
+                    align='center' 
+                >
+                    View this week{"'"}s survey results from the results page.
+                </Text>
+            </VStack>
+        )
+    }
+    if(isSaving) {
+        return (
+            <VStack>
+                <CircularProgress />
+            </VStack>
+        )
+    }
     
     return (
-        <Stack 
-            spacing={4}
-            direction="column"
-            alignItems="center"
+        <VStack 
+            spacing={8}
+            align='flex-start'
+            position='relative'
         >
-            {
-                complete ? (
-                    <Typography>
-                        Submitted!
-                    </Typography>
-                ) : (
-                    isSaving ? (
-                        <CircularProgress />
-                    ) : (
-                        <>
-                            <Tokens
-                                tokens={tokens}
-                                allocations={allocations}
-                                updateAllocation={updateAllocation}
-                                allocationsSum={allocationsSum}
-                            />
-                            <SubmitButton 
-                                invalidAllocations={invalidAllocations}
-                                submitAllocations={submitAllocations}
-                            />
-                        </>
-                    )
-                )
-            }
-        </Stack>
+            <VStack
+                align='flex-start'
+                spacing={1}
+            >
+                <Text
+                    fontSize="2xl"
+                    fontWeight="bold"
+                >
+                    Voting Page
+                </Text>
+                <Text>
+                    Input your desired token allocations for the RVPC Portfolio. The portfolio is rebalanced every Sunday. Weekly results are available on the results page.
+                </Text>
+            </VStack>
+            <Tokens
+                tokens={tokens}
+                allocations={allocations}
+                updateAllocation={updateAllocation}
+                allocationsSum={allocationsSum}
+            />
+            <SubmitButton 
+                invalidAllocations={invalidAllocations}
+                submitAllocations={submitAllocations}
+            />
+        </VStack>
     )
 }
 

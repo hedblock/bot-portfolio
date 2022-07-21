@@ -1,14 +1,16 @@
 import { useMoralisQuery } from "react-moralis";
-
 import { Moralis } from "moralis";
-import useTokens from "./useTokens";
+
+import useTokens, { Token } from "./useTokens";
+
+import { round2 } from "../services/utils";
 
 interface SubmissionAllocation {
     token: string;
     allocation: number;
 }
 
-export interface Allocation {
+export interface Allocation extends Token {
     symbol: string;
     slug: string;
     allocation: number;
@@ -53,25 +55,19 @@ const useResults = () => {
     }
 
     // calculate the aggregate allocation for each token
-    const calculateResults = () => {
+    const calculateResults = () : Allocation[] => {
         const thisWeekResults = getResultsObject(submissions);
         const lastWeekResults = lastWeekCache.length > 0 ? lastWeekCache[0].get('results') : {};
-        const results : Allocation[] = tokens
-            .map(token => {
-                const currentAllocation = thisWeekResults[token.slug] / submissions.length;
-                const lastAllocation = lastWeekResults[token.slug];
-                return {
-                    symbol: token.symbol,
-                    slug: token.slug,
-                    allocation: currentAllocation,
-                    change: lastAllocation
-                        ? currentAllocation - lastAllocation
-                        : (currentAllocation > 0 ? 100 : 0),
-                    price: token.price,
-                }
-            })
-            .sort((a, b) => b.allocation - a.allocation);
-        return results;
+        return tokens.map(token => {
+            const currentAllocation = round2(thisWeekResults[token.slug] / submissions.length);
+            const lastAllocation = lastWeekResults[token.slug];
+            return {
+                ...token,
+                allocation: currentAllocation,
+                change: currentAllocation - (lastAllocation || 0),
+            }
+        })
+        .sort((a, b) => b.allocation - a.allocation);
     }
 
     return {

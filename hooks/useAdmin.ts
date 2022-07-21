@@ -40,6 +40,8 @@ const useAdmin = () => {
             slug: token.get('slug') as string,
             cmcId: token.get('cmcId') as number,
             objectId: token.id,
+            coinMarketCapUrl: `https://coinmarketcap.com/currencies/${token.get('slug')}/`,
+            logo: token.get('logo') as string
         })));
     }, [tokensData]);
 

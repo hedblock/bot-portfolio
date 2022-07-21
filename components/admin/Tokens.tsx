@@ -1,10 +1,10 @@
 import React from 'react'
 
-import Stack from '@mui/material/Stack';
-import Typography from '@mui/material/Typography';
+import { Wrap, Text, VStack } from '@chakra-ui/react';
+
+import TokenDisplay from './TokenDisplay';
 
 import { Token } from '../../hooks/useAdmin';
-import TokenDisplay from './TokenDisplay';
 
 interface Props {
     tokens: Token[];
@@ -12,22 +12,41 @@ interface Props {
 }
 
 const Tokens : React.FC<Props> = ({ tokens, removeToken }) => {
-    return tokens.length > 0 ? (
-        <Stack 
-            direction='row' 
-            justifyContent='center' 
-            alignItems='center' 
-            flexWrap='wrap' 
-            spacing={2}
-        >
+
+    const areTokensAdded = tokens.length > 0;
+
+    return (
+        <VStack>
+            <Text
+                fontWeight='bold'
+                fontSize='xl'
+            >
+                {areTokensAdded ? "Tokens" : "No Tokens Added"}
+            </Text>
             {
-                tokens.map((token, index) => (
-                    <TokenDisplay key={token.symbol} token={token} removeToken={removeToken} />
-                ))
+                areTokensAdded ? (
+                    <Wrap 
+                        justify='center' 
+                        align='center' 
+                        spacing={2}
+                    >
+                        {
+                            tokens.map(token => (
+                                <TokenDisplay 
+                                    key={token.symbol} 
+                                    token={token} 
+                                    removeToken={removeToken} 
+                                />
+                            ))
+                        }
+                    </Wrap>
+                ) : (
+                    <Text>
+                        Input the symbol of the token you want to add.
+                    </Text>
+                )
             }
-        </Stack>
-    ) : (
-        <Typography variant='body2' color='#FFF' align='center'>No Tokens Added</Typography>
+        </VStack>
     )
 }
 

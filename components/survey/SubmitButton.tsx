@@ -2,9 +2,7 @@ import React from 'react';
 
 import useAuth from '../../hooks/useAuth';
 
-import Stack from '@mui/material/Stack';
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
+import { VStack, Button, Text } from '@chakra-ui/react';
 
 
 interface Props {
@@ -17,9 +15,13 @@ const SubmitButton : React.FC<Props> = ({ invalidAllocations, submitAllocations 
     const { tokenAuth: surveyAuth } = useAuth();
 
     return (
-        <Stack spacing={1} alignItems='center'>
+        <VStack
+            w='100%'
+            spacing={1} 
+        >
             <Button
-                variant='contained'
+                variant='solid'
+                colorScheme='brand'
                 onClick={submitAllocations}
                 disabled={!surveyAuth || invalidAllocations}
             >
@@ -27,19 +29,24 @@ const SubmitButton : React.FC<Props> = ({ invalidAllocations, submitAllocations 
             </Button>
             {
                 !surveyAuth && (
-                    <Typography variant='body2' color='error'>
+                    <Text 
+                        color='red.600'
+                    >
                         You must own an RVPC NFT to submit
-                    </Typography>
+                    </Text>
                 )
             }
             {
                 invalidAllocations && (
-                    <Typography variant='body2' color='error'>
+                    <Text 
+                        variant='body2' 
+                        color='red.600'
+                    >
                         Your allocations must sum to 100%
-                    </Typography>
+                    </Text>
                 )
             }
-        </Stack>
+        </VStack>
     )
 }
 

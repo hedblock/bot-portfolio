@@ -1,12 +1,25 @@
 import React from 'react'
 
-import Typography from '@mui/material/Typography'
+import {
+  VStack,
+  Heading,
+  Text,
+} from '@chakra-ui/react'
 
 const TokenUnauthorized = () => {
+
   return (
-    <Typography variant='body1' align='center' color='text.secondary'>
+    <VStack spacing={1}>
+      <Heading>
+        Token Gated
+      </Heading>
+      <Text 
+        variant='body1' 
+        align='center'
+      >
         You must own a RVPC NFT to access this page.
-    </Typography>
+      </Text>
+    </VStack>
   )
 }
 

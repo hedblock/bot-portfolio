@@ -20,7 +20,6 @@ const useTokens = () => {
         { live: true }
     );
 
-
     useEffect(() => {
         if (tokensData.length > 0) {
             setTokens(tokensData.map((token) => ({
@@ -29,6 +28,7 @@ const useTokens = () => {
                 slug: token.get('slug') as string,
                 cmcId: token.get('cmcId') as number,
                 price: token.get('price') as number,
+                logo: token.get('logo') as string,
             })));
         }
     }, [tokensData]);

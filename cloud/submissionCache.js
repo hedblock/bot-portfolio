@@ -35,5 +35,4 @@ Moralis.Cloud.job("cacheSubmissionWeekly", async (request) => {
     await result.save();
 
     return true;
-
-})
+});

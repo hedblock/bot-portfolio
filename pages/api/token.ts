@@ -6,17 +6,19 @@ interface Error {
 }
 
 interface TokenResponse {
-    symbol: string
-    name: string
-    slug: string
-    id: number
+    symbol: string;
+    name: string;
+    slug: string;
+    id: number;
+    logo: string;
 }
 
 export interface TokenData {
-    symbol: string,
-    name: string,
-    slug: string,
-    cmcId: number,
+    symbol: string;
+    name: string;
+    slug: string;
+    cmcId: number;
+    logo: string;
 }
 
 const handler = async (req: NextApiRequest, res: NextApiResponse<TokenData | Error>) => {
@@ -29,9 +31,9 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<TokenData | Err
         },
     })
 
-    if(tokenQuery.status === 400){
-        res.status(400).json({
-            error: 'Invalid token symbol'
+    if(tokenQuery.status !== 200){
+        res.status(tokenQuery.status).json({
+            error: tokenQuery.statusText,
         })
     } else {
         const tokenData = (await tokenQuery.json()).data[req.body.symbol];
@@ -40,7 +42,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse<TokenData | Err
             name: token.name,
             slug: token.slug,
             cmcId: token.id,
-            coinMarketCapUrl: `https://coinmarketcap.com/currencies/${token.slug}/`
+            logo: token.logo
         })))
     }
 }
