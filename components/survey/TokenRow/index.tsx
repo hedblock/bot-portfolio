@@ -4,10 +4,10 @@ import {
     HStack
 } from '@chakra-ui/react';
 
+import TokenDisplay from '../../utilities/TokenDisplay';
 import AllocationInput from './AllocationInput';
 
 import { Token } from '../../../hooks/useTokens';
-import TokenDisplay from '../../utilities/TokenDisplay';
 
 interface Props {
     token: Token,

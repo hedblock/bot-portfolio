@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 
+import { BigNumber } from '@ethersproject/bignumber';
+
 import { Moralis } from 'moralis';
 import { useMoralis, useWeb3ExecuteFunction } from 'react-moralis';
 
@@ -41,7 +43,7 @@ const useAuth = () => {
     // fetch RVPC NFT balance of current account 
     const { data, error, fetch } = useWeb3ExecuteFunction({
         abi: [{"inputs":[{"internalType":"address","name":"owner","type":"address"}],"name":"balanceOf","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}],
-        contractAddress: "0x76236b6f13f687d0bbedbbce0e30e9f07d071c1c",
+        contractAddress: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS as string,
         functionName: "balanceOf",
         params: {owner: account}
     }, );
@@ -52,12 +54,12 @@ const useAuth = () => {
     }, [account, fetch]);
 
     return {
-        // tokenAuth: data instanceof BigNumber && !data.isZero(),
+        tokenAuth: data instanceof BigNumber && !data.isZero(),
         // adminAuth: account && process.env.NEXT_PUBLIC_ADMIN_ADDRESS === account,
         account,
         loading,
         connect,
-        tokenAuth: true,
+        // tokenAuth: true,
         adminAuth: true,
     }
 }
