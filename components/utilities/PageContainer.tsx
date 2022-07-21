@@ -5,7 +5,7 @@ import { Container, VStack, CircularProgress } from '@chakra-ui/react'
 import AdminUnathorized from './AdminUnauthorized';
 import NotConnected from './NotConnected';
 import TokenUnauthorized from './TokenUnauthorized';
-
+import WrongChain from './WrongChain';
 
 import useAuth from '../../hooks/useAuth'
 
@@ -19,7 +19,7 @@ interface Props {
 
 const PageContainer : FC<Props> = ({ children, tokenGated, adminGated}) => {
 
-    const { account, loading, adminAuth, tokenAuth } = useAuth();
+    const { account, loading, adminAuth, tokenAuth, wrongChain } = useAuth();
 
     return (
         <Container
@@ -41,10 +41,16 @@ const PageContainer : FC<Props> = ({ children, tokenGated, adminGated}) => {
                         adminGated && !adminAuth ? (
                             <AdminUnathorized />
                         ) : (
-                            tokenGated && !tokenAuth ? (
-                                <TokenUnauthorized />
-                            ) : (
-                                children
+                            tokenGated && (
+                                wrongChain ? (
+                                    <WrongChain />
+                                ) : (
+                                    !tokenAuth ? (
+                                        <TokenUnauthorized />
+                                    ) : (
+                                        children
+                                    )
+                                )
                             )
                         )
                     ) : (

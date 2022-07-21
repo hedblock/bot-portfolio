@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { BigNumber } from '@ethersproject/bignumber';
 
 import { Moralis } from 'moralis';
-import { useMoralis, useWeb3ExecuteFunction } from 'react-moralis';
+import { useMoralis, useWeb3ExecuteFunction, useChain } from 'react-moralis';
 
 interface Connector {
     title: string;
@@ -21,6 +21,7 @@ const useAuth = () => {
 
     const [loading, setLoading] = useState(true);
     const { account, isWeb3Enabled, enableWeb3 } = useMoralis();
+    const { chainId } = useChain();
 
     useEffect(() => {
         const checkWeb3 = async () => {
@@ -45,22 +46,22 @@ const useAuth = () => {
         abi: [{"inputs":[{"internalType":"address","name":"owner","type":"address"}],"name":"balanceOf","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}],
         contractAddress: process.env.NEXT_PUBLIC_CONTRACT_ADDRESS as string,
         functionName: "balanceOf",
-        params: {owner: account}
-    }, );
+        params: {owner: account},
+    });
 
     // fetch balance whenever account changes
     useEffect(() => {
         fetch();
-    }, [account, fetch]);
+    }, [account, fetch, chainId]);
 
     return {
         tokenAuth: data instanceof BigNumber && !data.isZero(),
         // adminAuth: account && process.env.NEXT_PUBLIC_ADMIN_ADDRESS === account,
+        adminAuth: true,
         account,
         loading,
         connect,
-        // tokenAuth: true,
-        adminAuth: true,
+        wrongChain: chainId as string !== (process.env.NEXT_PUBLIC_CHAIN_ID as string),
     }
 }
 
