@@ -28,7 +28,7 @@ const Top10Allocations : React.FC<Props> = ({ results }) => {
                 fontSize='xl'
                 fontWeight='bold'
             >
-                Top 10 Allocations
+                Top Allocations
             </Text>
             <BarChart 
                 data={results.slice(0, numAllocations).map(allocation => allocation.allocation)}
