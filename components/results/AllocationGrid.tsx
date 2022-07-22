@@ -16,8 +16,9 @@ const AllocationGrid : React.FC<Props> = ({ results }) => {
 
     return (
         <VStack
-            spacing={2}
+            spacing={4}
             width='100%'
+            alignItems='flex-start'
         >
             <Text
                 fontWeight='bold'

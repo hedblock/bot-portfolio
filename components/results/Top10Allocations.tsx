@@ -23,6 +23,8 @@ const Top10Allocations : React.FC<Props> = ({ results }) => {
     return (
         <VStack
             width='100%'
+            alignItems='flex-start'
+            spacing={4}
         >
             <Text
                 fontSize='xl'

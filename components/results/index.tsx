@@ -15,6 +15,7 @@ const ResultsComponent = () => {
         <VStack
             width='100%'
             spacing={8}
+            alignItems='flex-start'
         >
             <Text
                 fontSize="2xl"

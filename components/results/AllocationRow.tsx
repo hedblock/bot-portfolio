@@ -19,21 +19,13 @@ const AllocationRow : React.FC<Props> = ({ allocation }) => {
             borderBottom='0.5px solid'
             py={'1rem'}
         >
-            <VStack
-                flex={1}
-            >
-                <TokenDisplay
-                    token={allocation}
-                />
-            </VStack>
-            <VStack
-                flex={1}
-            >
-                <AllocationDisplay
-                    allocation={allocation.allocation}
-                    change={allocation.change}
-                />
-            </VStack>
+           <TokenDisplay
+                token={allocation}
+            />
+            <AllocationDisplay
+                allocation={allocation.allocation}
+                change={allocation.change}
+            />
         </HStack>
     )
 }

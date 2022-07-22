@@ -10,14 +10,12 @@ const HeaderRow : React.FC = () => (
         <Text
             fontWeight='bold'
             flex={1}
-            align='center'
         >
             Token
         </Text>
         <Text
             fontWeight='bold'
             flex={1}
-            align='center'
         >
             Allocation (Change)
         </Text>
