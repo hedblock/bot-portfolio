@@ -59,12 +59,12 @@ const useResults = () => {
         const thisWeekResults = getResultsObject(submissions);
         const lastWeekResults = lastWeekCache.length > 0 ? lastWeekCache[0].get('results') : {};
         return tokens.map(token => {
-            const currentAllocation = round2(thisWeekResults[token.slug] / submissions.length);
-            const lastAllocation = lastWeekResults[token.slug];
+            const currentAllocation = round2((thisWeekResults[token.slug] || 0) / submissions.length);
+            const lastAllocation = (lastWeekResults[token.slug] || 0);
             return {
                 ...token,
                 allocation: currentAllocation,
-                change: currentAllocation - (lastAllocation || 0),
+                change: currentAllocation - lastAllocation,
             }
         })
         .sort((a, b) => b.allocation - a.allocation);
