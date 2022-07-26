@@ -49,7 +49,6 @@ const useSurvey = () => {
     );
 
     useEffect(() => {
-        console.log(lastWeekCache)
         if (lastWeekCache.length > 0) {
             const lastWeekResults = lastWeekCache[0].get('results');
             const allocationsSum = tokens.reduce((acc, token) => acc + (lastWeekResults[token.slug] || 0), 0);
@@ -77,14 +76,14 @@ const useSurvey = () => {
                 return value;
             } else {
                 if(denom > 1) {
-                    return round2(allocation / denom);
+                    return allocation / denom;
                 } else {
                     return allocation;
                 }
             }
         });
-        setAllocations(newAllocations);
-        setAllocationsSum(newAllocations.reduce((a, b) => a + b, 0));
+        setAllocations(newAllocations.map(allocation => round2(allocation)));
+        setAllocationsSum(round2(newAllocations.reduce((a, b) => a + b, 0)));
     };
 
     // create new submission if user hasnt submitted
