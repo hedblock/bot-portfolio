@@ -87,6 +87,7 @@ const useSurvey = () => {
 
     const setEqualAllocations = () => {
         setAllocations(tokens.map(_ => 100 / tokens.length));
+        setAllocationsSum(100);
     }
 
     return { 
