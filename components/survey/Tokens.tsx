@@ -13,9 +13,10 @@ interface Props {
     allocations: number[],
     allocationsSum: number,
     updateAllocation: (index: number, allocation: number) => void,
+    setEqualAllocations: () => void,
 }
 
-const Tokens : React.FC<Props> = ({ tokens, allocations, updateAllocation, allocationsSum }) => {
+const Tokens : React.FC<Props> = ({ tokens, allocations, updateAllocation, setEqualAllocations, allocationsSum }) => {
 
     return (
         <VStack
@@ -33,7 +34,10 @@ const Tokens : React.FC<Props> = ({ tokens, allocations, updateAllocation, alloc
                     />
                 ))
             }
-            <FooterRow allocationsSum={allocationsSum}/>
+            <FooterRow 
+                allocationsSum={allocationsSum}
+                setEqualAllocations={setEqualAllocations}
+            />
         </VStack>
     )
 }

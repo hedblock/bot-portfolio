@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useMoralis, useMoralisQuery, useNewMoralisObject } from 'react-moralis';
+import { round2 } from '../services/utils';
 
 import useTokens from './useTokens';
 
@@ -51,8 +52,19 @@ const useSurvey = () => {
 
     // update allocation for given token and check if allocations sum to 100%
     const updateAllocation = (index: number, value: number) => {
-        const newAllocations = [...allocations];
-        newAllocations[index] = value;
+        const otherSum = allocations.reduce((acc, cur, i) => (i === index ? acc : acc + cur), 0);
+        const denom = otherSum / (100 - value);
+        const newAllocations = allocations.map((allocation, i) => {
+            if (i === index) {
+                return value;
+            } else {
+                if(denom > 1) {
+                    return round2(allocation / denom);
+                } else {
+                    return allocation;
+                }
+            }
+        });
         setAllocations(newAllocations);
         setAllocationsSum(newAllocations.reduce((a, b) => a + b, 0));
     };
@@ -73,12 +85,17 @@ const useSurvey = () => {
         setComplete(true);
     }
 
+    const setEqualAllocations = () => {
+        setAllocations(tokens.map(_ => 100 / tokens.length));
+    }
+
     return { 
         tokens, 
         allocations,
         allocationsSum,
         invalidAllocations: allocationsSum !== 100,
         updateAllocation,
+        setEqualAllocations,
         submitAllocations,
         isSaving,
         complete,

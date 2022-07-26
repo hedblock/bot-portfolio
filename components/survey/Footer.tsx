@@ -1,22 +1,28 @@
 import React from 'react'
 
-import { HStack, Text } from '@chakra-ui/react'
+import { HStack, Text, Button } from '@chakra-ui/react'
 
 interface Props {
-    allocationsSum: number
+    allocationsSum: number;
+    setEqualAllocations: () => void;
 }
 
-const FooterRow : React.FC<Props> = ({ allocationsSum }) => {
+const FooterRow : React.FC<Props> = ({ allocationsSum, setEqualAllocations }) => {
   return (
     <HStack 
         w='100%'
-        justifyContent='flex-end'
+        justifyContent='space-between'
     >
-        <Text
-            fontWeight='bold'
-        >
-           Total: {allocationsSum}%
-        </Text>
+      <Button
+        onClick={setEqualAllocations}
+      >
+        Set Equal Allocations
+      </Button>
+      <Text
+          fontWeight='bold'
+      >
+          Total: {allocationsSum}%
+      </Text>
     </HStack>
   )
 }

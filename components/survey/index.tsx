@@ -5,7 +5,8 @@ import useSurvey from '../../hooks/useSurvey';
 import Tokens from './Tokens';
 import SubmitButton from './SubmitButton';
 
-import { Heading, VStack, Text, CircularProgress } from '@chakra-ui/react';
+import { VStack, Text, CircularProgress, Button } from '@chakra-ui/react';
+import Link from 'next/link';
 
 const SurveyComponent = () => {
     const { 
@@ -14,6 +15,7 @@ const SurveyComponent = () => {
         allocationsSum,
         invalidAllocations,
         updateAllocation,
+        setEqualAllocations,
         submitAllocations,
         isSaving,
         complete,
@@ -21,7 +23,7 @@ const SurveyComponent = () => {
 
     if(complete) {
         return (
-            <VStack spacing={1}>
+            <VStack spacing={2}>
                 <Text
                     fontSize="2xl"
                     fontWeight="bold"
@@ -33,6 +35,17 @@ const SurveyComponent = () => {
                 >
                     View this week{"'"}s survey results from the results page.
                 </Text>
+                <Link
+                    href="/results"
+                    passHref
+                >
+                    <Button
+                        variant='solid'
+                        colorScheme='brand'
+                    >
+                        View Results
+                    </Button>
+                </Link>
             </VStack>
         )
     }
@@ -69,6 +82,7 @@ const SurveyComponent = () => {
                 allocations={allocations}
                 updateAllocation={updateAllocation}
                 allocationsSum={allocationsSum}
+                setEqualAllocations={setEqualAllocations}
             />
             <SubmitButton 
                 invalidAllocations={invalidAllocations}
