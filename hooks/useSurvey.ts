@@ -40,9 +40,26 @@ const useSurvey = () => {
         { live: true }
     );
 
+    const { data: lastWeekCache, isLoading, error } = useMoralisQuery(
+        "Results",
+        query => query
+            .descending('startDate')
+            .limit(1),
+        [],
+    );
+
     useEffect(() => {
-        setAllocations(tokens.map(_ => 0));
-    }, [tokens])
+        console.log(lastWeekCache)
+        if (lastWeekCache.length > 0) {
+            const lastWeekResults = lastWeekCache[0].get('results');
+            const allocations = tokens.map(token => round2(lastWeekResults[token.slug]) || 0);
+            setAllocations(allocations);
+            setAllocationsSum(round2(allocations.reduce((acc, cur) => acc + cur, 0)));
+        } else {
+            setAllocations(tokens.map(() => 0));
+            setAllocationsSum(0);
+        }
+    }, [tokens, lastWeekCache])
 
     const [complete, setComplete] = useState<boolean>(false);
         

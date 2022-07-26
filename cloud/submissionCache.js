@@ -1,8 +1,9 @@
 Moralis.Cloud.job("cacheSubmissionWeekly", async (request) => {
 
     const today = new Date();
+    if(today.getDay() !== 0) return false;
     today.setHours(0, 0, 0, 0);
-    const lastSunday = new Date(today.setDate(today.getDate() - today.getDay()));
+    const lastSunday = new Date(today.setDate(today.getDate() - 7));
 
     const Results = Moralis.Object.extend("Results");
     const resultsQuery = new Moralis.Query(Results);
