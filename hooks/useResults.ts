@@ -64,7 +64,7 @@ const useResults = () => {
             return {
                 ...token,
                 allocation: currentAllocation,
-                change: currentAllocation - lastAllocation,
+                change: round2(currentAllocation - lastAllocation),
             }
         })
         .sort((a, b) => b.allocation - a.allocation);
