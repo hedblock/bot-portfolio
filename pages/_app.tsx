@@ -8,7 +8,7 @@ import { AppProps } from 'next/app';
 
 import { MoralisProvider } from "react-moralis";
 
-import { ChakraProvider } from '@chakra-ui/react'
+import { ChakraProvider, ColorModeScript } from '@chakra-ui/react'
 import Layout from '../components/layout';
 
 const clientSideEmotionCache = createEmotionCache();
@@ -37,6 +37,7 @@ export default function MyApp(props : Props) {
       >
         <ChakraProvider theme={chakraTheme}>
           <Layout>
+            <ColorModeScript initialColorMode={chakraTheme.config.initialColorMode} />
             <Component {...pageProps} />
           </Layout>
         </ChakraProvider>

@@ -1,4 +1,4 @@
-import { extendTheme } from "@chakra-ui/react";
+import { extendTheme, ThemeConfig } from "@chakra-ui/react";
 import { CardComponent } from "./additions/card/card";
 import { buttonStyles } from "./components/button";
 import { badgeStyles } from "./components/badge";
@@ -12,7 +12,8 @@ import { breakpoints } from "./foundations/breakpoints";
 import { fonts } from "./foundations/fonts";
 import { globalStyles } from "./styles";
 
-const config = {
+// 2. Add your color mode config
+const config: ThemeConfig = {
   initialColorMode: 'dark',
   useSystemColorMode: false,
 }
