@@ -1,4 +1,4 @@
-import { extendTheme, ThemeConfig } from "@chakra-ui/react";
+import { extendTheme, ThemeConfig, Theme } from "@chakra-ui/react";
 import { CardComponent } from "./additions/card/card";
 import { buttonStyles } from "./components/button";
 import { badgeStyles } from "./components/badge";
@@ -18,7 +18,7 @@ const config: ThemeConfig = {
   useSystemColorMode: false,
 }
 
-export default extendTheme(
+const theme = extendTheme(
   { breakpoints }, // Breakpoints
   { fonts }, // Fonts
   globalStyles,
@@ -31,5 +31,7 @@ export default extendTheme(
   textareaStyles, // textarea styles
   switchStyles, // switch styles
   CardComponent, // card component
-  config
+  { config }
 );
+
+export default theme
