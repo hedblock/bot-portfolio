@@ -37,7 +37,6 @@ export default function MyApp(props : Props) {
       >
         <ChakraProvider theme={chakraTheme}>
           <Layout>
-            <ColorModeScript initialColorMode={chakraTheme.config.initialColorMode} />
             <Component {...pageProps} />
           </Layout>
         </ChakraProvider>
