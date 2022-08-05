@@ -1,10 +1,11 @@
-import { FC } from 'react';
+import { useEffect, FC } from 'react';
 
 import { useRouter } from 'next/router';
 
 import {
   HStack,
   Text,
+  useColorMode
 } from '@chakra-ui/react';
 
 import NavLink from './NavLink';
@@ -15,6 +16,14 @@ import routes from './routes';
 export const navbarHeight = '4rem';
 
 const Navbar : FC = () => {
+
+    const { colorMode, toggleColorMode } = useColorMode();
+
+    useEffect(() => {
+        if(colorMode === 'light'){
+            toggleColorMode();
+        }
+    }, [colorMode])
 
     const router = useRouter()
 
