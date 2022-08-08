@@ -1,7 +1,6 @@
 import { FC } from 'react'
 
 import { Heading, VStack, Text } from '@chakra-ui/react'
-import Link from 'next/link'
 
 const AboutComponent : FC = () => {
   return (
@@ -33,7 +32,7 @@ const AboutComponent : FC = () => {
       <Text
         textAlign='center'
       >
-        We've already seen amazing results on our free-for-all Real Vision Bot portfolio survey, which has been running since April 2021. The RVPC Portfolio is the next step in our journey towards harnessing the power of the Hive Mind. The RVPC community gives us the opportunity to truly work on the decentralized signal engine of the future. Our overall goal is to build a soon-to-be investable product that incentivizes top performers in the community and can serve as a benchmark product highlighting the power of the Hive Mind.
+        We&apos;ve already seen amazing results on our free-for-all Real Vision Bot portfolio survey, which has been running since April 2021. The RVPC Portfolio is the next step in our journey towards harnessing the power of the Hive Mind. The RVPC community gives us the opportunity to truly work on the decentralized signal engine of the future. Our overall goal is to build a soon-to-be investable product that incentivizes top performers in the community and can serve as a benchmark product highlighting the power of the Hive Mind.
       </Text>
       <Heading
         size='lg'
@@ -43,7 +42,7 @@ const AboutComponent : FC = () => {
       <Text
         textAlign='center'
       >
-        Voting is possible via the "Vote" tab. Login is possible by connecting the wallet holding your RVPC NFT via Metmask. Note that no transaction is required for logging into the tool, only a login message has to be confirmed in Metamask. 
+        Voting is possible via the &quot;Vote&quot; tab. Login is possible by connecting the wallet holding your RVPC NFT via Metmask. Note that no transaction is required for logging into the tool, only a login message has to be confirmed in Metamask. 
       </Text>
       <Text
         textAlign='center'
@@ -53,7 +52,7 @@ const AboutComponent : FC = () => {
       <Text
         textAlign='center'
       >
-        For ease of use, the voting page always showed last weeks portfolio weights as starting points. You can equally allocated to all tokens by clicking "set equal allocation". Participants can allocate between 0 and 100% of the portfolio weights to a token.
+        For ease of use, the voting page always showed last weeks portfolio weights as starting points. You can equally allocated to all tokens by clicking &quot;set equal allocation&quot;. Participants can allocate between 0 and 100% of the portfolio weights to a token.
       </Text>
       <Heading
         size='lg'
@@ -73,7 +72,7 @@ const AboutComponent : FC = () => {
       <Text
         textAlign='center'
       >
-        Basic results and statistics can be viewed on the survey page under tab "Results". In addition, the Real Vision Bot keeps the RVPC community up-to-date via the RVPC Discord as well as Email.
+        Basic results and statistics can be viewed on the survey page under tab &quot;Results&quot;. In addition, the Real Vision Bot keeps the RVPC community up-to-date via the RVPC Discord as well as Email.
       </Text>
       <Heading
         size='lg'
@@ -83,7 +82,7 @@ const AboutComponent : FC = () => {
       <Text
         textAlign='center'
       >
-        While the RVPC portfolio is not investable in its current format, we're working on a solution that allows interested investors to follow its signals. Ultimately, this will allow us to reward the community members for their insights.
+        While the RVPC portfolio is not investable in its current format, we&apos;re working on a solution that allows interested investors to follow its signals. Ultimately, this will allow us to reward the community members for their insights.
       </Text>
       <Heading
         size='lg'
@@ -103,7 +102,7 @@ const AboutComponent : FC = () => {
       <Text
         textAlign='center'
       >
-       The portfolio consists of 9 tokens. Currently, the following tokens are included in the survey: BTC, ETH, UNI, USDC, BNB, AAVE, MATIC, MKR, FTT. We plan to extend the list of available tokens in coordination with the RVPC community and availability on platforms that we're currently working with to launch an investable product.
+       The portfolio consists of 9 tokens. Currently, the following tokens are included in the survey: BTC, ETH, UNI, USDC, BNB, AAVE, MATIC, MKR, FTT. We plan to extend the list of available tokens in coordination with the RVPC community and availability on platforms that we&apos;re currently working with to launch an investable product.
       </Text>
     </VStack>
   )
