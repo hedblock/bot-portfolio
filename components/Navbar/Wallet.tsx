@@ -11,7 +11,7 @@ import useAuth, { connectors } from '../../hooks/useAuth';
 
 const Wallet = () => {
 
-    const { account, connect } = useAuth();
+    const { account, connect, disconnect } = useAuth();
 
     return (
         <Menu>
@@ -28,7 +28,9 @@ const Wallet = () => {
                 {
                     account ? (
                         <>
-                            <MenuItem>
+                            <MenuItem
+                                onClick={disconnect}
+                            >
                                 Disconnect
                             </MenuItem>
                         </>

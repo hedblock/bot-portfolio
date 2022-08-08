@@ -20,13 +20,13 @@ export const connectors : Connector[] = [
 const useAuth = () => {
 
     const [loading, setLoading] = useState(true);
-    const { account, isWeb3Enabled, enableWeb3 } = useMoralis();
+    const { account, isWeb3Enabled, isWeb3EnableLoading, enableWeb3, deactivateWeb3 } = useMoralis();
     const { chainId } = useChain();
 
     useEffect(() => {
         const checkWeb3 = async () => {
             const connectorId = window.localStorage.getItem("connectorId");
-            if (!account && connectorId) {
+            if (!isWeb3Enabled && !isWeb3EnableLoading && connectorId) {
                 await enableWeb3({ provider: connectorId as Moralis.Web3ProviderType });
             }
             setLoading(false);
@@ -41,6 +41,13 @@ const useAuth = () => {
         }
     }
 
+    const disconnect = async () => {
+        if(isWeb3Enabled){
+            await deactivateWeb3();
+            window.localStorage.removeItem("connectorId")
+        }
+    }
+
     // fetch RVPC NFT balance of current account 
     const { data, error, fetch } = useWeb3ExecuteFunction({
         abi: [{"inputs":[{"internalType":"address","name":"owner","type":"address"}],"name":"balanceOf","outputs":[{"internalType":"uint256","name":"","type":"uint256"}],"stateMutability":"view","type":"function"}],
@@ -48,6 +55,8 @@ const useAuth = () => {
         functionName: "balanceOf",
         params: {owner: account},
     });
+
+    console.log(isWeb3Enabled, account);
 
     // fetch balance whenever account changes
     useEffect(() => {
@@ -61,6 +70,7 @@ const useAuth = () => {
         account,
         loading,
         connect,
+        disconnect,
         wrongChain: chainId as string !== (process.env.NEXT_PUBLIC_CHAIN_ID as string),
     }
 }
