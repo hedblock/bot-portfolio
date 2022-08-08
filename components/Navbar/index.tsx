@@ -23,7 +23,7 @@ const Navbar : FC = () => {
         if(colorMode === 'light'){
             toggleColorMode();
         }
-    }, [colorMode])
+    }, [colorMode, toggleColorMode]);
 
     const router = useRouter()
 
