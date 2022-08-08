@@ -52,7 +52,7 @@ const useSurvey = () => {
         if (lastWeekCache.length > 0) {
             const lastWeekResults = lastWeekCache[0].get('results');
             const allocationsSum = tokens.reduce((acc, token) => acc + (lastWeekResults[token.slug] || 0), 0);
-            const allocations = tokens.map(token => round2((lastWeekResults[token.slug] || 0) * (100 / allocationsSum)));
+            const allocations = tokens.map(token => round2((lastWeekResults[token.slug] || 0) * (100 / (allocationsSum || 1))));
             setAllocations(allocations);
             setAllocationsSum(round2(allocations.reduce((acc, cur) => acc + cur, 0)));
         } else {
