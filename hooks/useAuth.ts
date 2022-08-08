@@ -56,8 +56,6 @@ const useAuth = () => {
         params: {owner: account},
     });
 
-    console.log(isWeb3Enabled, account);
-
     // fetch balance whenever account changes
     useEffect(() => {
         fetch();
