@@ -74,7 +74,7 @@ const SurveyComponent = () => {
                     Voting Page
                 </Text>
                 <Text>
-                    Input your desired token allocations for the RVPC Portfolio. The portfolio is rebalanced every Sunday. Weekly results are available on the results page.
+                    The Real Vision Pro Crypto (RVPC) Portfolio is a community driven portfolio, based on the votes in the RVPC survey. It is administered by the Real Vision Bot, which aggregates the weekly votes into an allocation and informs the RVPC community about rebalancings, interesting developments and performance.
                 </Text>
             </VStack>
             <Tokens

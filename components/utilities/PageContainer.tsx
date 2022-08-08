@@ -15,9 +15,10 @@ interface Props {
     children: ReactNode
     tokenGated?: boolean
     adminGated?: boolean
+    connectionGated?: boolean
 }
 
-const PageContainer : FC<Props> = ({ children, tokenGated, adminGated}) => {
+const PageContainer : FC<Props> = ({ children, tokenGated, adminGated, connectionGated = true}) => {
 
     const { account, loading, adminAuth, tokenAuth, wrongChain } = useAuth();
 
@@ -26,7 +27,7 @@ const PageContainer : FC<Props> = ({ children, tokenGated, adminGated}) => {
             flex={1}
             display='flex'
             flexDirection='column'
-            py={navbarHeight}
+            py={'6rem'}
             justifyContent='center'
         >
             {
@@ -37,8 +38,10 @@ const PageContainer : FC<Props> = ({ children, tokenGated, adminGated}) => {
                         />
                     </VStack>
                 ) : (
-                    account ? (
-                        adminGated && !adminAuth ? (
+                    (connectionGated && !account) ? (
+                        <NotConnected />
+                    ) : (
+                        (adminGated && !adminAuth) ? (
                             <AdminUnathorized />
                         ) : (
                             tokenGated ? (
@@ -55,8 +58,6 @@ const PageContainer : FC<Props> = ({ children, tokenGated, adminGated}) => {
                                 children
                             )
                         )
-                    ) : (
-                        <NotConnected />
                     )
                 )
                 

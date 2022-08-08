@@ -4,9 +4,6 @@ import { ColorModeScript } from '@chakra-ui/react'
 import chakraTheme from '../theme/theme';
 
 export default function Document() {
-
-  console.log(chakraTheme.config.initialColorMode)
-
   return (
     <Html>
         <Head>
