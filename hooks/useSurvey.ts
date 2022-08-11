@@ -9,7 +9,6 @@ interface Allocation {
     allocation: number;
 }
 
-
 interface SubmissionData {
     [key: string]: any;
     id?: string;
