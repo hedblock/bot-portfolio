@@ -100,7 +100,7 @@ const AboutComponent : FC = () => {
         You Mentioned I Can Invest in the Portfolio
       </Heading>
       <Text>
-        The Pro Crypto Bot Portfolio is not currently investable, but we’re working on a solution that will allow interested investors to follow its signals. This will put skin in the game and reward community members for their insights.
+        The Pro Crypto Bot Portfolio is not currently investable, but we&apos;re working on a solution that will allow interested investors to follow its signals. This will put skin in the game and reward community members for their insights.
       </Text>
       <Heading
         size='lg'
