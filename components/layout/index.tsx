@@ -24,7 +24,6 @@ const Layout : FC<Props> = ({ children }) => {
                 background-position='top center'
                 background-repeat='no-repeat'
                 background-size='auto'
-    
             >
                 { children }
             </Flex>
