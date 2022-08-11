@@ -1,108 +1,126 @@
 import { FC } from 'react'
 
-import { Heading, VStack, Text } from '@chakra-ui/react'
+import { Heading, VStack, Text, UnorderedList, ListItem } from '@chakra-ui/react'
 
 const AboutComponent : FC = () => {
   return (
     <VStack
       spacing={4}
+      align='flex-start'
     >
       <Heading
         size='2xl'
         mb={'1rem'}
+        textAlign='center'
+        w={'100%'}
       >
         About
       </Heading>
       <Heading
         as='h2'
         size='lg'
+        textAlign='center'
+        w='100%'
       >
         The Portfolio
       </Heading>
+      <Text>
+        It&apos;s powered by you... 
+      </Text>
       <Text
-        textAlign='center'
       >
-        The Real Vision Pro Crypto (RVPC) Portfolio is a community driven portfolio, based on the votes in the RVPC survey. It is administered by the Real Vision Bot, which aggregates the weekly votes into an allocation and informs the RVPC community about rebalancings, interesting developments and performance.
+        The Pro Crypto Early Adopter NFT portfolio is a community-driven crypto portfolio and will serve as a benchmark that highlights the power of the Hive Mind.
+      </Text>
+      <Text>
+        So, how does it work?
+      </Text>
+      <Text>
+        You all will fill out a survey where you&apos;ll indicate your recommended portfolio allocation. Then, the Real Vision Bot will tally up the votes on a weekly basis and create a portfolio based on the results. To make sure we&apos;re all on the same page, we&apos;ll keep you updated on any rebalancing, developments, or performance relating to the portfolio.
       </Text>
       <Heading
         size='lg'
+        textAlign='center'
+        w='100%'
       >
         The Goal
       </Heading>
-      <Text
-        textAlign='center'
-      >
-        We&apos;ve already seen amazing results on our free-for-all Real Vision Bot portfolio survey, which has been running since April 2021. The RVPC Portfolio is the next step in our journey towards harnessing the power of the Hive Mind. The RVPC community gives us the opportunity to truly work on the decentralized signal engine of the future. Our overall goal is to build a soon-to-be investable product that incentivizes top performers in the community and can serve as a benchmark product highlighting the power of the Hive Mind.
+      <Text>
+        The ultimate goal of the Pro Crypto Hive Mind is to take the brilliant thoughts of community members and distill them into a unified set of insights. The Pro Crypto Early Adopter NFT portfolio is the next big step in our journey towards doing just that.
+      </Text>
+      <Text>
+        But the journey doesn&apos;t end here...
+      </Text>
+      <Text>
+        We&apos;re working to take this portfolio to the next level by making the portfolio investable (yep, it&apos;ll be kind of like an index or ETF). And as always, we&apos;ll need your feedback every step of the way.
       </Text>
       <Heading
         size='lg'
+        textAlign='center'
+        w='100%'
       >
         How to Vote
       </Heading>
-      <Text
-        textAlign='center'
-      >
-        Voting is possible via the &quot;Vote&quot; tab. Login is possible by connecting the wallet holding your RVPC NFT via Metmask. Note that no transaction is required for logging into the tool, only a login message has to be confirmed in Metamask. 
+      <Text>
+        To vote, head on over to the &apos;Vote&apos; tab, connect your MetaMask wallet that holds your Pro Crypto Early Adopter NFT and fill out the survey based on how you feel the various tokens will perform over the next week.
       </Text>
-      <Text
-        textAlign='center'
-      >
-        Once logged in, voting is possible at any time. Note that if you vote multiple times during the week, your latest vote will be overwritten. Results are aggregated weekly on Sunday night. 
+      <Text>
+        A couple things to note... 
       </Text>
-      <Text
-        textAlign='center'
-      >
-        For ease of use, the voting page always showed last weeks portfolio weights as starting points. You can equally allocated to all tokens by clicking &quot;set equal allocation&quot;. Participants can allocate between 0 and 100% of the portfolio weights to a token.
-      </Text>
+      <UnorderedList>
+        <ListItem>If you vote multiple times during the week, only the last vote will be counted toward the portfolio allocation.</ListItem>
+        <ListItem>No transaction is required to vote or login, so you don&apos;t have to worry about gas fees.</ListItem>
+        <ListItem>The Real Vision Bot will aggregate the results every Sunday night.</ListItem>
+        <ListItem>You can equally allocate all tokens by clicking &apos;set equal allocation.&apos;</ListItem>
+      </UnorderedList>
       <Heading
         size='lg'
+        textAlign='center'
+        w='100%'
       >
         How is the Portfolio Aggregated?
       </Heading>
-      <Text
-        textAlign='center'
-      >
-        The portfolio aggregates the individual votes by averaging and standardizing such that the total weight sums up to 100%.
+      <Text>
+        The Real Vision Bot will crunch the numbers and average individual votes, creating a weighted average asset allocation.
       </Text>
       <Heading
         size='lg'
+        textAlign='center'
+        w='100%'
       >
         Where Can I View the Results?
       </Heading>
-      <Text
-        textAlign='center'
-      >
-        Basic results and statistics can be viewed on the survey page under tab &quot;Results&quot;. In addition, the Real Vision Bot keeps the RVPC community up-to-date via the RVPC Discord as well as Email.
+      <Text>
+        You can view results and statistics under the &apos;Results&apos; tab. We&apos;ll share deeper insights and commentary on portfolio developments via the Discord and email.
       </Text>
       <Heading
         size='lg'
-      >
-        Will There Be an Investable Product?
-      </Heading>
-      <Text
         textAlign='center'
+        w='100%'
       >
-        While the RVPC portfolio is not investable in its current format, we&apos;re working on a solution that allows interested investors to follow its signals. Ultimately, this will allow us to reward the community members for their insights.
+        You Mentioned I Can Invest in the Portfolio
+      </Heading>
+      <Text>
+        The Pro Crypto Bot Portfolio is not currently investable, but we’re working on a solution that will allow interested investors to follow its signals. This will put skin in the game and reward community members for their insights.
       </Text>
       <Heading
         size='lg'
-      >
-        Why Can Only Nft Holders Vote?
-      </Heading>
-      <Text
         textAlign='center'
+        w='100%'
       >
-        In this initial version of the RVPC Portfolio, we make use of the simplicity of using NFTs to access the voting page. We are working on the tech to allow RVPC subscribers to vote on a portfolio of their own, introducing a bit of healthy competition :)
+        Why Can Only Early Adopter NFT Holders Vote?
+      </Heading>
+      <Text>
+        This is the initial, beta test version of the Pro Crypto Portfolio, and using NFTs to log in members allowed us to roll out the portfolio simply and quickly. We are working on building a similar portfolio, just for Pro Crypto subscribers. Having these 2 portfolios running alongside one another will create healthy competition and allow for multiple investing strategies.
       </Text>
       <Heading
         size='lg'
-      >
-        The Tokens
-      </Heading>
-      <Text
         textAlign='center'
+        w='100%'
       >
-       The portfolio consists of 9 tokens. Currently, the following tokens are included in the survey: BTC, ETH, UNI, USDC, BNB, AAVE, MATIC, MKR, FTT. We plan to extend the list of available tokens in coordination with the RVPC community and availability on platforms that we&apos;re currently working with to launch an investable product.
+        Which Tokens are Included in the Survey?
+      </Heading>
+      <Text>
+        The portfolio currently consists of 9 tokens: BTC, ETH, UNI, USDC, BNB, AAVE, MATIC, MKR, FTT. This list will be extended based on your feedback and their availability on the platforms we&apos;re currently working with to launch the investable portfolio.
       </Text>
     </VStack>
   )
