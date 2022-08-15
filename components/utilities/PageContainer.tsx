@@ -20,7 +20,7 @@ interface Props {
 
 const PageContainer : FC<Props> = ({ children, tokenGated, adminGated, connectionGated = true}) => {
 
-    const { account, loading, adminAuth, tokenAuth, wrongChain } = useAuth();
+    const { isAuthenticated, loading, adminAuth, tokenAuth, wrongChain } = useAuth();
 
     return (
         <Container
@@ -38,7 +38,7 @@ const PageContainer : FC<Props> = ({ children, tokenGated, adminGated, connectio
                         />
                     </VStack>
                 ) : (
-                    (connectionGated && !account) ? (
+                    (connectionGated && !isAuthenticated) ? (
                         <NotConnected />
                     ) : (
                         (adminGated && !adminAuth) ? (

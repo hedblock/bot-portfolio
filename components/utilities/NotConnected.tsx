@@ -11,13 +11,13 @@ const NotConnected = () => {
   return (
     <VStack spacing={1}>
       <Heading>
-        Not Connected
+        Not Authenticated
       </Heading>
       <Text 
         variant='body1' 
         align='center'
       >
-          You must connect your wallet to view this page.
+          You must connect your wallet and sign the terms and conditions to view this page.
       </Text>
     </VStack>
   )

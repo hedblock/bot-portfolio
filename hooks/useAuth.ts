@@ -20,13 +20,22 @@ export const connectors : Connector[] = [
 const useAuth = () => {
 
     const [loading, setLoading] = useState(true);
-    const { account, isWeb3Enabled, isWeb3EnableLoading, enableWeb3, authenticate, logout } = useMoralis();
+    const { 
+        account, 
+        isAuthenticated, 
+        isWeb3Enabled, 
+        isWeb3EnableLoading, 
+        enableWeb3,
+        deactivateWeb3,
+        authenticate, 
+        logout
+    } = useMoralis();
     const { chainId } = useChain();
 
     useEffect(() => {
         const checkWeb3 = async () => {
             const connectorId = window.localStorage.getItem("connectorId");
-            if (!isWeb3Enabled && !isWeb3EnableLoading && connectorId) {
+            if (isAuthenticated && !isWeb3Enabled && !isWeb3EnableLoading && connectorId) {
                 await enableWeb3({ provider: connectorId as Moralis.Web3ProviderType });
             }
             setLoading(false);
@@ -36,10 +45,13 @@ const useAuth = () => {
 
     const connect = async (connectorId : Moralis.Web3ProviderType) => {
         if (!isWeb3Enabled) {
-            await authenticate({ 
+            const user = await authenticate({ 
                 provider: connectorId,
                 signingMessage: "Welcome to the RVPC Bot Portfolio! \n\nClick to sign in and accept the terms of service (LINK HERE). This request will not trigger a blockchain transaction or cost any gas fees. "
             });
+            if (!user) {
+                await deactivateWeb3();
+            }
             window.localStorage.setItem("connectorId", connectorId);
         }
     }
@@ -69,6 +81,7 @@ const useAuth = () => {
         // adminAuth: account && process.env.NEXT_PUBLIC_ADMIN_ADDRESS === account,
         adminAuth: true,
         account,
+        isAuthenticated,
         loading,
         connect,
         disconnect,
