@@ -21,7 +21,7 @@ const ResultsComponent = () => {
                 fontSize="2xl"
                 fontWeight="bold"
             >
-                Weekly Results
+                Prev. Weekly Results
             </Text>
             <Top10Allocations 
                 results={currentResults}

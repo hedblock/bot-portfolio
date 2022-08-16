@@ -20,51 +20,26 @@ export interface Allocation extends Token {
 
 const useResults = () => {
 
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    const lastSunday = new Date(today.setDate(today.getDate() - today.getDay()));
-    const nextSunday = new Date(today.setDate(today.getDate() - today.getDay() + 7));
-
     const tokens = useTokens();
 
-    // get all submissions
-    const { data: submissions } = useMoralisQuery(
-        "Submissions", 
-        query => query
-            .greaterThan('updatedAt', lastSunday)
-            .lessThan('updatedAt', nextSunday),
-        [],
-        { live: true }
-    );
-
-    const { data: lastWeekCache, isLoading, error } = useMoralisQuery(
+    const { data: pastResults, isLoading } = useMoralisQuery(
         "Results",
         query => query
             .descending('startDate')
-            .limit(1),
+            .limit(2),
         [],
     );
 
-    const getResultsObject = (submissions: Moralis.Object<Moralis.Attributes>[]) => {
-        return submissions.reduce((acc : {[key: string]: number}, submission) => {
-            submission.get('allocations').forEach((allocation : SubmissionAllocation) => {
-                acc[allocation.token] = (acc[allocation.token] || 0) + allocation.allocation;
-            })
-            return acc;
-        }, {});
-    }
-
     // calculate the aggregate allocation for each token
     const calculateResults = () : Allocation[] => {
-        const thisWeekResults = getResultsObject(submissions);
-        const lastWeekResults = lastWeekCache.length > 0 ? lastWeekCache[0].get('results') : {};
+        const lastWeekResults = pastResults.length > 0 ? pastResults[0].get('results') : {};
+        const prevWeekResults = pastResults.length > 1 ? pastResults[1].get('results') : {};
         return tokens.map(token => {
-            const currentAllocation = round2((thisWeekResults[token.slug] || 0) / (submissions.length || 1));
-            const lastAllocation = round2(lastWeekResults[token.slug] || 0);
+            const allocation = round2(lastWeekResults[token.slug] || 0);
             return {
                 ...token,
-                allocation: currentAllocation,
-                change: round2(currentAllocation - lastAllocation),
+                allocation,
+                change: round2(allocation - (prevWeekResults[token.slug] || 0)),
             }
         })
         .sort((a, b) => b.allocation - a.allocation);

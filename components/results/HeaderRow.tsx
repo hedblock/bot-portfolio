@@ -17,7 +17,7 @@ const HeaderRow : React.FC = () => (
             fontWeight='bold'
             flex={1}
         >
-            Allocation (Change)
+            Allocation (7d Change)
         </Text>
     </HStack>
 )
