@@ -33,7 +33,8 @@ const useAuth = () => {
     const { chainId } = useChain();
 
     useEffect(() => {
-        const checkWeb3 = async () => {
+        const checkWeb3 = async () => { 
+            console.log(isAuthenticated, isWeb3Enabled, isWeb3EnableLoading);
             const connectorId = window.localStorage.getItem("connectorId");
             if (isAuthenticated && !isWeb3Enabled && !isWeb3EnableLoading && connectorId) {
                 await enableWeb3({ provider: connectorId as Moralis.Web3ProviderType });
@@ -41,7 +42,7 @@ const useAuth = () => {
             setLoading(false);
         }
         checkWeb3();
-    }, [account, isWeb3Enabled, enableWeb3]);
+    }, [isAuthenticated, isWeb3Enabled]);
 
     const connect = async (connectorId : Moralis.Web3ProviderType) => {
         if (!isWeb3Enabled) {

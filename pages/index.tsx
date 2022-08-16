@@ -7,6 +7,7 @@ const Home : NextPage = () => {
   return (
     <PageContainer
       tokenGated
+      connectionGated
     >
       <SurveyComponent />
     </PageContainer>
