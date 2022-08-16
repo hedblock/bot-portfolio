@@ -11,6 +11,7 @@ const TokenSymbol : React.FC<Props> = ({ symbol, slug }) => {
     return (
         <Link 
             href={`https://coinmarketcap.com/currencies/${slug}/`}
+            isExternal
         >
             <Text
                 opacity={0.8}
