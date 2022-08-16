@@ -1,8 +1,6 @@
 import { FC } from 'react'
 
-import { HStack, Text, Image } from '@chakra-ui/react'
-
-import TokenSymbol from './TokenSymbol'
+import { HStack, Text, Image, Link } from '@chakra-ui/react'
 
 import { round2 } from '../../services/utils';
 
@@ -28,17 +26,19 @@ const TokenDisplay : FC<Props> = ({ token }) => {
                 w='30px'
                 rounded='full'
             />
-            <HStack>
+            <Link 
+                href={`https://coinmarketcap.com/currencies/${token.slug}/`}
+                isExternal
+            >
                 <Text
                     fontWeight='bold'
+                    _hover={{
+                        opacity: 0.5
+                    }}
                 >
-                    {token.name}
+                    {token.name}{'\t'}<Text as='span' opacity={0.8}>{token.symbol}</Text>
                 </Text>
-                <TokenSymbol 
-                    symbol={token.symbol}
-                    slug={token.slug}
-                />
-            </HStack>
+            </Link>
         </HStack>
         <HStack>
             <Text>
