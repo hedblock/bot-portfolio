@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { HStack, Text, Button } from '@chakra-ui/react'
+import { HStack, Text, Button, Flex } from '@chakra-ui/react'
 
 interface Props {
     allocationsSum: number;
@@ -12,17 +12,28 @@ const FooterRow : React.FC<Props> = ({ allocationsSum, setEqualAllocations }) =>
     <HStack 
         w='100%'
         justifyContent='space-between'
+        position='sticky'
+        bottom={1}
     >
       <Button
         onClick={setEqualAllocations}
+        bg='navy.700'
       >
         Set Equal Allocations
       </Button>
-      <Text
-          fontWeight='bold'
+      <Flex
+        bg='navy.700'
+        h={10}
+        alignItems='center'
+        px={4}
+        rounded='xl'
       >
+        <Text
+          fontWeight='bold'
+        >
           Total: {allocationsSum}%
-      </Text>
+        </Text>
+      </Flex>
     </HStack>
   )
 }
