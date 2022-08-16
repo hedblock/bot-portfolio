@@ -1,40 +1,51 @@
 import React from 'react'
 
-import { HStack, Text, Button, Flex } from '@chakra-ui/react'
+import { HStack, VStack, Text, Button, Flex } from '@chakra-ui/react'
+import SubmitButton from './SubmitButton';
 
 interface Props {
     allocationsSum: number;
     setEqualAllocations: () => void;
+    invalidAllocations: boolean,
+    submitAllocations: () => void
 }
 
-const FooterRow : React.FC<Props> = ({ allocationsSum, setEqualAllocations }) => {
+const FooterRow : React.FC<Props> = ({ allocationsSum, setEqualAllocations, invalidAllocations, submitAllocations }) => {
   return (
-    <HStack 
-        w='100%'
-        justifyContent='space-between'
-        position='sticky'
-        bottom={1}
+    <VStack
+      w='100%'
+      position='sticky'
+      bottom={1}
     >
-      <Button
-        onClick={setEqualAllocations}
-        bg='navy.700'
+      <HStack 
+          w='100%'
+          justifyContent='space-between'
       >
-        Set Equal Allocations
-      </Button>
-      <Flex
-        bg='navy.700'
-        h={10}
-        alignItems='center'
-        px={4}
-        rounded='xl'
-      >
-        <Text
-          fontWeight='bold'
+        <Button
+          onClick={setEqualAllocations}
+          bg='navy.700'
         >
-          Total: {allocationsSum}%
-        </Text>
-      </Flex>
-    </HStack>
+          Set Equal Allocations
+        </Button>
+        <Flex
+          bg='navy.700'
+          h={10}
+          alignItems='center'
+          px={4}
+          rounded='xl'
+        >
+          <Text
+            fontWeight='bold'
+          >
+            Total: {allocationsSum}%
+          </Text>
+        </Flex>
+      </HStack>
+      <SubmitButton 
+        invalidAllocations={invalidAllocations}
+        submitAllocations={submitAllocations}
+      />
+    </VStack>
   )
 }
 

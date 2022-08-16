@@ -21,16 +21,22 @@ const SubmitButton : React.FC<Props> = ({ invalidAllocations, submitAllocations 
         >
             <Button
                 variant='solid'
-                colorScheme='brand'
+                colorScheme='#FFFF00'
                 onClick={submitAllocations}
                 disabled={!surveyAuth || invalidAllocations}
+                bg='#FFFF00'
+                color='black'
+                _hover={{
+                    bg: "#FFFF00",
+                    opacity: 0.5
+                }}
             >
                 Submit
             </Button>
             {
                 !surveyAuth && (
                     <Text 
-                        color='red.600'
+                        color='red.300'
                     >
                         You must own an RVPC NFT to submit
                     </Text>
@@ -40,7 +46,7 @@ const SubmitButton : React.FC<Props> = ({ invalidAllocations, submitAllocations 
                 invalidAllocations && (
                     <Text 
                         variant='body2' 
-                        color='red.600'
+                        color='red.300'
                     >
                         Your allocations must sum to 100%
                     </Text>

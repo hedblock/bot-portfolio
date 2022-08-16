@@ -83,8 +83,6 @@ const SurveyComponent = () => {
                 updateAllocation={updateAllocation}
                 allocationsSum={allocationsSum}
                 setEqualAllocations={setEqualAllocations}
-            />
-            <SubmitButton 
                 invalidAllocations={invalidAllocations}
                 submitAllocations={submitAllocations}
             />
