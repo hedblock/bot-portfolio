@@ -3,6 +3,7 @@ import { FC, ReactNode } from 'react'
 import { Flex } from '@chakra-ui/react'
 
 import Navbar from '../Navbar'
+import Footer from '../Footer';
 
 interface Props {
     children: ReactNode;
@@ -26,8 +27,9 @@ const Layout : FC<Props> = ({ children }) => {
                 background-size='auto'
             >
                 { children }
+                
             </Flex>
-            
+            <Footer />
         </Flex>
     )
 }
