@@ -16,6 +16,7 @@ const FooterRow : React.FC<Props> = ({ allocationsSum, setEqualAllocations, inva
       w='100%'
       position='sticky'
       bottom={1}
+      zIndex={2}
     >
       <HStack 
           w='100%'
