@@ -149,7 +149,9 @@ const Footer = () => {
     <Box
         w='100%'
         bg='white'
-        p={8}
+        pt={"80px"}
+        px={"48px"}
+        pb={"56px"}
     >
         <Flex
             direction={{ base: 'column', lg: 'row' }}

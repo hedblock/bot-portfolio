@@ -23,8 +23,8 @@ const LinkColumn : React.FC<Props> = ({ title, links}) => {
     >
         <Text
             fontWeight='bold'
-            fontSize='lg'
             color='black'
+            fontSize='16px'
         >
             { title }
         </Text>
@@ -36,6 +36,7 @@ const LinkColumn : React.FC<Props> = ({ title, links}) => {
                 >
                     <Text 
                         color='black'
+                        fontSize='16px'
                     >
                         { link.name }
                     </Text>
