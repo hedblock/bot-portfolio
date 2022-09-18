@@ -4,6 +4,7 @@ import {
     Text,
     VStack
 } from '@chakra-ui/react'
+import Link from 'next/link';
 
 interface Link {
     name: string;
@@ -29,18 +30,35 @@ const LinkColumn : React.FC<Props> = ({ title, links}) => {
             { title }
         </Text>
         {
-            links.map((link, index) => (
-                <a
-                    key={index}
-                    href={link.href}
-                >
-                    <Text 
-                        color='black'
-                        fontSize='16px'
+            links.map((link) => (
+                link.href.includes('http') ? (
+                    <a
+                        key={link.href}
+                        href={link.href}
+                        target='_blank'
                     >
-                        { link.name }
-                    </Text>
-                </a>
+                        <Text 
+                            color='black'
+                            fontSize='16px'
+                        >
+                            { link.name }
+                        </Text>
+                    </a>
+                ) : (
+                    <Link
+                        key={link.href}
+                        href={link.href}
+                        passHref
+                    >
+                        <Text 
+                            color='black'
+                            fontSize='16px'
+                        >
+                            { link.name }
+                        </Text>
+                    </Link>
+                )
+                
             ))
         }
     </VStack>

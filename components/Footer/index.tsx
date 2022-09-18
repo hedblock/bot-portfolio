@@ -126,7 +126,7 @@ const columns = [
             },
             {
                 name: 'Disclaimer',
-                href: 'https://www.realvision.com/mobile-app/disclaimer'
+                href: '/disclaimer'
             },
             {
                 name: 'Privacy',
