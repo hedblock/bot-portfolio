@@ -162,6 +162,7 @@ const Footer = () => {
             <Image 
                 src='https://www.realvision.com/wp/app/themes/prospect/images/logos/generic/black/logo-generic2x.png?x27527'
                 height={50}
+                alt='Real Vision Logo'
             />
             <SimpleGrid
                 alignItems='flex-start'

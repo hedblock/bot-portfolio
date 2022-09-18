@@ -48,7 +48,7 @@ const useAuth = () => {
         if (!isWeb3Enabled) {
             const user = await authenticate({ 
                 provider: connectorId,
-                signingMessage: "Welcome to the RVPC Bot Portfolio! \n\nClick to sign in and accept the terms of service (LINK HERE). This request will not trigger a blockchain transaction or cost any gas fees. "
+                signingMessage: "Welcome to the RVPC Bot Portfolio! \n\nClick to sign in and accept the terms of service https://nftvoting.botportfolio.realvision.com/disclaimer. This request will not trigger a blockchain transaction or cost any gas fees. "
             });
             if (!user) {
                 await deactivateWeb3();

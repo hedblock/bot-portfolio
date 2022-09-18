@@ -36,6 +36,7 @@ const LinkColumn : React.FC<Props> = ({ title, links}) => {
                         key={link.href}
                         href={link.href}
                         target='_blank'
+                        rel="noreferrer"
                     >
                         <Text 
                             color='black'
