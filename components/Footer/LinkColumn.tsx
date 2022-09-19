@@ -54,6 +54,9 @@ const LinkColumn : React.FC<Props> = ({ title, links}) => {
                         <Text 
                             color='black'
                             fontSize='16px'
+                            _hover={{
+                                cursor: 'pointer',
+                            }}
                         >
                             { link.name }
                         </Text>
