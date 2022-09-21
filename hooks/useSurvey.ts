@@ -46,7 +46,7 @@ const useSurvey = () => {
             const prevAllocationObject = prevAllocations
                 .filter(allocation => tokenKeys.has(allocation.token))
                 .reduce((acc : object, allocation: Allocation) => ({...acc, [allocation.token]: allocation.allocation}), {})
-            const allocationsSum = Object.values(prevAllocationObject).reduce((acc : number, val : number) => acc + val);
+            const allocationsSum = Object.values(prevAllocationObject).reduce((acc : number, val : number) => acc + val, 0);
             const allocations = tokens.map(token => (prevAllocationObject[token.slug] || 0) * (100 / (allocationsSum || 1)));
             setAllocations(allocations.map(round2));
             setAllocationsSum(round2(allocations.reduce((acc, cur) => acc + cur, 0)));
