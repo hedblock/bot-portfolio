@@ -65,7 +65,7 @@ const SurveyComponent = () => {
         >
             <VStack
                 align='flex-start'
-                spacing={1}
+                spacing={4}
             >
                 <Text
                     fontSize="2xl"
@@ -75,6 +75,9 @@ const SurveyComponent = () => {
                 </Text>
                 <Text>
                     The Real Vision Pro Crypto (RVPC) Portfolio is a community driven portfolio, based on the votes in the RVPC survey. It is administered by the Real Vision Bot, which aggregates the weekly votes into an allocation and informs the RVPC community about rebalancings, interesting developments and performance.
+                </Text>
+                <Text>
+                    How would you position your portfolio for the next week based on the tokens available?
                 </Text>
             </VStack>
             <Tokens
