@@ -1,4 +1,4 @@
-import { FC } from 'react'
+import { FC, useEffect, useState } from 'react'
 
 import {
     HStack,
@@ -20,9 +20,21 @@ interface Props {
 
 const AllocationInput : FC<Props> = ({ allocation, updateAllocation}) => {
 
-    const handleChange = (value: number) => {
-        updateAllocation(value);
+
+    const handleTextChange = (value: string) => {
+        setInputAsString(value);
+        if(value[-1] !== "."){
+            updateAllocation(parseFloat(value));
+        }
     }
+
+    const [inputAsString, setInputAsString] = useState(allocation?.toString() || "0");
+
+    useEffect(() => {
+        if(allocation && allocation.toString() !== inputAsString){
+            setInputAsString(allocation.toString())
+        }
+    }, [allocation])
 
     return (
         <HStack
@@ -33,7 +45,7 @@ const AllocationInput : FC<Props> = ({ allocation, updateAllocation}) => {
                 flex={1}
                 focusThumbOnChange={false}
                 value={allocation}
-                onChange={handleChange}
+                onChange={updateAllocation}
             >
                 <SliderTrack>
                     <SliderFilledTrack />
@@ -44,8 +56,8 @@ const AllocationInput : FC<Props> = ({ allocation, updateAllocation}) => {
             </Slider>
             <NumberInput 
                 maxW='100px' 
-                value={allocation} 
-                onChange={(val_as_string) => handleChange(parseFloat(val_as_string) || 0)}
+                value={inputAsString}
+                onChange={(val) => handleTextChange(val)}
                 min={0}
                 max={100}
             >
