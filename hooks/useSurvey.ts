@@ -39,26 +39,22 @@ const useSurvey = () => {
         { live: true }
     );
 
-    const { data: lastWeekCache, isLoading, error } = useMoralisQuery(
-        "Results",
-        query => query
-            .descending('startDate')
-            .limit(1),
-        [],
-    );
-
     useEffect(() => {
-        if (lastWeekCache.length > 0) {
-            const lastWeekResults = lastWeekCache[0].get('results');
-            const allocationsSum = tokens.reduce((acc, token) => acc + (lastWeekResults[token.slug] || 0), 0);
-            const allocations = tokens.map(token => (lastWeekResults[token.slug] || 0) * (100 / (allocationsSum || 1)));
+        if (submissionData.length > 0) {
+            const tokenKeys = new Set(tokens.map(token => token.slug));
+            const prevAllocations : Allocation[] = submissionData[0].get('allocations');
+            const prevAllocationObject = prevAllocations
+                .filter(allocation => tokenKeys.has(allocation.token))
+                .reduce((acc : object, allocation: Allocation) => ({...acc, [allocation.token]: allocation.allocation}), {})
+            const allocationsSum = Object.values(prevAllocationObject).reduce((acc : number, val : number) => acc + val);
+            const allocations = tokens.map(token => (prevAllocationObject[token.slug] || 0) * (100 / (allocationsSum || 1)));
             setAllocations(allocations.map(round2));
             setAllocationsSum(round2(allocations.reduce((acc, cur) => acc + cur, 0)));
         } else {
             setAllocations(tokens.map(() => 0));
             setAllocationsSum(0);
         }
-    }, [tokens, lastWeekCache])
+    }, [tokens, submissionData])
 
     const [complete, setComplete] = useState<boolean>(false);
         

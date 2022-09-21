@@ -45,7 +45,7 @@ const AllocationInput : FC<Props> = ({ allocation, updateAllocation}) => {
             <NumberInput 
                 maxW='100px' 
                 value={allocation} 
-                onChange={(_, val) => handleChange(val || 0)}
+                onChange={(val_as_string) => handleChange(parseFloat(val_as_string) || 0)}
                 min={0}
                 max={100}
             >
