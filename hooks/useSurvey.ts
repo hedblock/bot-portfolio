@@ -32,9 +32,7 @@ const useSurvey = () => {
     // get submissions for current user
     const { data: submissionData } = useMoralisQuery(
         "Submissions",
-        query => query
-            .equalTo('address', account)
-            .greaterThan('updatedAt', lastSunday),
+        query => query.equalTo('address', account).descending('updatedAt'),
         [],
         { live: true }
     );
@@ -92,7 +90,10 @@ const useSurvey = () => {
                 allocation: allocations[index]
             }))
         }
-        if(submissionData.length > 0) data.id = submissionData[0].id;
+        if(submissionData.length > 0 && submissionData[0].get('updatedAt') > lastSunday) {
+            console.log("update");
+            data.id = submissionData[0].id;
+        }
         await save(data);
         setComplete(true);
     }
