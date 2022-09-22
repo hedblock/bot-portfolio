@@ -21,15 +21,15 @@ interface Props {
 const AllocationInput : FC<Props> = ({ allocation, updateAllocation}) => {
 
     const handleTextChange = (value : string) => {
+        console.log(value);
         if(value == ""){
             updateAllocation(0);
             setInputAsString("0");
         } else if(parseFloat(value) <= 100){
-            if(value[-1] !== "."){
+            if(value[value.length-1] !== "."){
                 updateAllocation(parseFloat(value));
-            } else {
-                setInputAsString(value);
             }
+            setInputAsString(value);
         }        
     }
 
@@ -39,7 +39,7 @@ const AllocationInput : FC<Props> = ({ allocation, updateAllocation}) => {
         if(allocation !== undefined && allocation.toString() !== inputAsString){
             setInputAsString(allocation.toString())
         }
-    }, [inputAsString, allocation]);
+    }, [allocation]);
 
     return (
         <HStack
@@ -63,6 +63,7 @@ const AllocationInput : FC<Props> = ({ allocation, updateAllocation}) => {
                 maxW='100px' 
                 value={inputAsString}
                 onChange={(val) => handleTextChange(val)}
+                onBlur={(e) => updateAllocation(parseFloat(e.target.value))}
                 min={0}
                 max={100}
             >
