@@ -36,8 +36,7 @@ const AllocationInput : FC<Props> = ({ allocation, updateAllocation}) => {
     const [inputAsString, setInputAsString] = useState(allocation?.toString() || "0");
 
     useEffect(() => {
-        console.log(allocation, inputAsString);
-        if(allocation && allocation.toString() !== inputAsString){
+        if(allocation !== undefined && allocation.toString() !== inputAsString){
             setInputAsString(allocation.toString())
         }
     }, [inputAsString, allocation]);
