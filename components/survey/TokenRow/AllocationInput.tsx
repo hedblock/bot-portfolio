@@ -20,21 +20,27 @@ interface Props {
 
 const AllocationInput : FC<Props> = ({ allocation, updateAllocation}) => {
 
-
-    const handleTextChange = (value: string) => {
-        setInputAsString(value);
-        if(value[-1] !== "."){
-            updateAllocation(parseFloat(value));
-        }
+    const handleTextChange = (value : string) => {
+        if(value == ""){
+            updateAllocation(0);
+            setInputAsString("0");
+        } else if(parseFloat(value) <= 100){
+            if(value[-1] !== "."){
+                updateAllocation(parseFloat(value));
+            } else {
+                setInputAsString(value);
+            }
+        }        
     }
 
     const [inputAsString, setInputAsString] = useState(allocation?.toString() || "0");
 
     useEffect(() => {
+        console.log(allocation, inputAsString);
         if(allocation && allocation.toString() !== inputAsString){
             setInputAsString(allocation.toString())
         }
-    }, [allocation])
+    }, [inputAsString, allocation]);
 
     return (
         <HStack
