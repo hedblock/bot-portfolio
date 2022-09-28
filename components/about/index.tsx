@@ -47,7 +47,7 @@ const AboutComponent : FC = () => {
               </Text>
               <Text
               >
-                The Pro Crypto Early Adopter NFT portfolio is a community-driven crypto portfolio and will serve as a benchmark that highlights the power of the Hive Mind.
+                The Pro Crypto Portfolio is a community-driven crypto portfolio and will serve as a benchmark that highlights the power of the Hive Mind.
               </Text>
               <Text>
                 So, how does it work?
@@ -74,7 +74,7 @@ const AboutComponent : FC = () => {
                 alignItems='flex-start'
               >
                 <Text>
-                  The ultimate goal of the Pro Crypto Hive Mind is to take the brilliant thoughts of community members and distill them into a unified set of insights. The Pro Crypto Early Adopter NFT portfolio is the next big step in our journey towards doing just that.
+                  The ultimate goal of the Pro Crypto Hive Mind is to take the brilliant thoughts of community members and distill them into a unified set of insights. The Pro Crypto Portfolio is the next big step in our journey towards doing just that.
                 </Text>
                 <Text>
                   But the journey doesn&apos;t end here...
@@ -101,7 +101,7 @@ const AboutComponent : FC = () => {
               alignItems='flex-start'
             >
               <Text>
-                To vote, head on over to the &apos;Vote&apos; tab, connect your MetaMask wallet that holds your Pro Crypto Early Adopter NFT and fill out the survey based on how you feel the various tokens will perform over the next week.
+                To vote, head on over to the &apos;Vote&apos; tab, connect your MetaMask wallet that holds your RVPC NFT and fill out the survey based on how you feel the various tokens will perform over the next week.
               </Text>
               <Text>
                 A couple things to note... 
@@ -159,7 +159,7 @@ const AboutComponent : FC = () => {
           </AccordionButton>
           <AccordionPanel>
             <Text>
-              The Pro Crypto Bot Portfolio is not currently investable, but we&apos;re working on a solution that will allow interested investors to follow its signals. This will put skin in the game and reward community members for their insights.
+              The Pro Crypto Portfolio is not currently investable, but we&apos;re working on a solution that will allow interested investors to follow its signals. This will put skin in the game and reward community members for their insights.
             </Text>
           </AccordionPanel>
         </AccordionItem>
@@ -170,7 +170,7 @@ const AboutComponent : FC = () => {
               mr='auto'
               textAlign='left'
             >
-              Why Can Only Early Adopter NFT Holders Vote?
+              Why Can Only RVPC NFT holders Vote?
             </Heading>
             <AccordionIcon />
           </AccordionButton>
